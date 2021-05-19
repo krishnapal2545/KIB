@@ -40,37 +40,39 @@
   <div class="alert alert-primary" role="alert">
     {{Result}}
   </div>
-  <div class="container">
-  <form method="POST" >{% csrf_token %}
-  <div class="imgcontainer">
-    <img src="{% static 'images\avtar.png' %}" alt="Avatar" class="avatar">
-  </div>
-    <label for="account_no"><b>Account : </b></label>
-    <input id='in'type="text" placeholder="Enter Account Number" name="account_no" required><br>
-    <label for="login_id"><b>Username : </b></label>
-    <input id='in'type="text" placeholder="Enter Username" name="login_id" required><br>
-    <label for="password"><b>Password :</b></label>
-    <input id='in'type="password" placeholder="Enter Password" name="password" required><br>
-    <div id="mar">
-      <button type="submit" class="btn btn-primary" id="b"> Login</button><br>
-    </div>
-    <a data-toggle="modal" data-target="#myModal" style="cursor: pointer;">Forget Password?</a>
-  <div class="modal fade" id="myModal" role="dialog">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h4 class="modal-title">Forget Password </h4>
+<div class="card mb-3" style="max-width: 600px; margin:auto; border-radius:20px; padding: 10px; background-color: #f2f2f2; ">
+  <div class="row g-0">
+    <form method="POST" >{% csrf_token %}
+      <div class="imgcontainer">
+        <img src="{% static 'images\avtar.png' %}" alt="Avatar" class="avatar">
+      </div>
+        <label for="account_no"><b>Account : </b></label>
+        <input id='in'type="text" placeholder="Enter Account Number" name="account_no" required><br>
+        <label for="login_id"><b>Username : </b></label>
+        <input id='in'type="text" placeholder="Enter Username" name="login_id" required><br>
+        <label for="password"><b>Password :</b></label>
+        <input id='in'type="password" placeholder="Enter Password" name="password" required><br>
+        <div id="mar">
+          <button type="submit" class="btn btn-primary" id="b"> Login</button><br>
         </div>
-        <div class="modal-body">
-          <p> Contact with you nearest branch of KIB-Bank .</p>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <a data-toggle="modal" data-target="#myModal" style="cursor: pointer;">Forget Password?</a>
+      <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title">Forget Password </h4>
+            </div>
+            <div class="modal-body">
+              <p> Contact with you nearest branch of KIB-Bank .</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
+    </form>
   </div>
-</form>
 </div>
 {%endblock%}
 </body>
