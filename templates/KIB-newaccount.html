@@ -68,7 +68,7 @@ button:hover{
 </div>
 <div class="card mb-3" style="max-width: 800px; margin:auto; border-radius:15px; padding: 10px; background-color: #f2f2f2; ">
   <div class="row g-0">
-    <form method='POST' id="regForm" enctype="multipart/form-data"> {% csrf_token %}
+    <form method='POST' id="regForm"> {% csrf_token %}
       <h3 style="text-align: center;">Registration Form</h3>
       <div class="tab">
         <b>Account Type : </b><select id="in" name="account" ><option value="saving">Saving-Account</option><option value="current">Current-Account</option></select><br>
