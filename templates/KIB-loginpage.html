@@ -6,9 +6,6 @@
 <head>  
   <title>Personal-Login</title>
 <style>
-  #mar{
-    margin: auto;
-  }
  #in{
     width: 100%;
     padding: 12px;
@@ -21,6 +18,7 @@
 }
 #b {
   border-radius: 15px;
+  margin: auto;
 }
 .imgcontainer {
   text-align: center;
@@ -33,30 +31,49 @@
   background-color: #f2f2f2;
   padding: 10px;
 }
+button:hover{
+  opacity: 1;
+  background-color: aqua;
+}
 </style>
+<script type="text/javascript">
+  function preventBack() { window.history.forward(); }
+  setTimeout("preventBack()", 0);
+  window.onunload = function () { null };
+</script>
 </head>
 <body>
   {%block content%}
-  <div class="alert alert-primary" role="alert">
-    {{Result}}
+  <div class="alert alert-primary" role="alert" style="padding:0px">
+    <marquee>This Webpage is a Project of Mr.KrishnaKumar Pal.It's a demo Webpage not an Official bank.</marquee>
   </div>
-<div class="card mb-3" style="max-width: 600px; margin:auto; border-radius:20px; padding: 10px; background-color: #f2f2f2; ">
+  {% for message in messages %}
+  <div class="container-fluid p-0">
+    <div class="alert {{ message.tags }} alert-dismissible" role="alert" style="text-align: center;">
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+      {{ message }}
+    </div>
+  </div>
+  {% endfor %}
+<div class="card mb-3" style="max-width: 500px; margin:auto; border-radius:20px; padding: 10px; background-color: #f2f2f2; ">
   <div class="row g-0">
-    <form method="POST" >{% csrf_token %}
+    <form  method="POST" >
+      {% csrf_token %}
       <div class="imgcontainer">
         <img src="{% static 'images\avtar.png' %}" alt="Avatar" class="avatar">
       </div>
         <label for="account_no"><b>Account : </b></label>
-        <input id='in'type="text" placeholder="Enter Account Number" name="account_no" required><br>
+        <input id='in'type="text" placeholder="Enter Your Account Number" name="account_no" required><br>
         <label for="login_id"><b>Username : </b></label>
-        <input id='in'type="text" placeholder="Enter Username" name="login_id" required><br>
+        <input id='in'type="text" placeholder="Enter Your Username" name="login_id" required><br>
         <label for="password"><b>Password :</b></label>
-        <input id='in'type="password" placeholder="Enter Password" name="password" required><br>
-        <div style="margin: auto;">
-        <div id="mar">
-          <button type="submit" class="btn btn-primary" id="b"> Login</button><br>
-        </div>
-        <a data-toggle="modal" data-target="#myModal" style="cursor: pointer;">Forget Password?</a>
+        <input id='in'type="password" placeholder="Enter Your Password" name="password" required><br>
+        <div style="margin: auto; width:60% ; text-align:center">
+          <button type="submit" class="btn btn-primary" style="border-radius: 15px; width:100%;"> <b>Login</b></button><br>
+          <a data-toggle="modal" data-target="#myModal" style="cursor: pointer; " href="">Forget Password?.</a><br>
+          <a style="cursor: pointer;" href="https://online-kib.herokuapp.com/newaccount/">or Open NewAccount</a>
       </div>
       <div class="modal fade" id="myModal" role="dialog">
         <div class="modal-dialog">
@@ -65,7 +82,7 @@
               <h4 class="modal-title">Forget Password </h4>
             </div>
             <div class="modal-body">
-              <p> Contact with you nearest branch of KIB-Bank .</p>
+              <p> Contact online with our KIB-Bank staff.</p>
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

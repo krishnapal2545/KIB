@@ -11,17 +11,25 @@
   <style>
     #im{
       margin: auto;
-      width: 5%;
-      height: 5%;
+      width: 100%;
+      height: 100%;
+    }
+    .fa {
+      font-size: 30px;
+      width: 30px;
+      text-align: center;
+      text-decoration: none;
     }
   </style>
 </head>
 <body>
-
   {%block content%}
+  
   <div class="alert alert-primary" role="alert">
+    {{Result}}
+    <marquee>This Webpage is a Project of Mr.KrishnaKumar Pal.It's a demo Webpage not an Official bank.</marquee>
   </div>
-  <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+  <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" style="width:auto;height:auto;">
     <div class="carousel-inner">
         <div class="carousel-item active">
             <img class="d-block w-100" src="{%static 'images/KIBS1.png'%}" >
@@ -41,7 +49,7 @@
         <span class="carousel-control-next-icon" aria-hidden="true"></span>
         <span class="sr-only">Next</span>
     </a>
-<div class="card mb-3" style="max-width: 600px; margin:auto">
+<div class="card mb-3" style="max-width: 400px; margin:auto;">
   <div class="row g-0">
     <div class="col-md-4">
       <img src="{%static 'images/krishna.png'%}" class="card-img-top" >
@@ -50,7 +58,10 @@
       <div class="card-body">
         <h5 class="card-title">KrishnaKumar Pal</h5>
         <p class="card-text">B.Tech in EXTC <br> Student at K. J. Somaiya College Of Engineering</p>
-        <a href="https://www.linkedin.com/in/krishna-pal-6765221bb" class="btn btn-primary">LinkedIN</a>
+        <a href="https://www.linkedin.com/in/krishna-pal-6765221bb" target="_blank" class="fa fa-linkedin"></a>
+        <a href="https://www.instagram.com/invites/contact/?i=k6juulw0fkq5&utm_content=33sxvxh"target="_blank" class="fa fa-instagram"></a>
+        <a href="https://www.facebook.com/profile.php?id=100014250917258"target="_blank" class="fa fa-facebook"></a>
+        <a href="https://github.com/krishnapal2545"target="_blank" class="fa fa-github"></a>
       </div>
     </div>
   </div>

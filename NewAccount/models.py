@@ -7,12 +7,9 @@ class CustomerInfo (models.Model):
     nominee= models.CharField(max_length=255)
     nominee_realt = models.CharField(max_length=255)
     phone = models.IntegerField()
-    email = models.EmailField()
     aadhar = models.IntegerField()
     pan = models.CharField(max_length=10)
     profile_img = models.ImageField(upload_to='profile_img/')
     aadhar_img = models.ImageField(upload_to='aadhar_img/')
     pan_img = models.ImageField(upload_to='pan_img/')
-    login_id = models.EmailField()
-    password = models.CharField(max_length=8)
 
