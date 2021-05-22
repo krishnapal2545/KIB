@@ -27,7 +27,7 @@ SECRET_KEY = ')jb_nox@^g4=-6u4$#=#d!0+x4#3yxgh7azy313fl#++$@4(@m'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1','online-kib.herokuapp.com']
+ALLOWED_HOSTS = ['127.0.0.1','onlinekib.herokuapp.com']
 
 MESSAGE_TAGS = {
         messages.DEBUG: 'alert-secondary',
