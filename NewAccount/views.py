@@ -22,6 +22,7 @@ def newaccount(request):
         total_loan = 0.00
         total_balance = 0.00
         open_time = date.today()
+        debit_expire = open_time.replace(year=open_time.year + 10)
         name = request.POST['name']
         gender = request.POST['gender']
         nominee = request.POST['nominee']
@@ -47,7 +48,7 @@ def newaccount(request):
         email_from = settings.EMAIL_HOST_USER
         recipient_list = [email, ]
         send_mail( subject, message, email_from, recipient_list )
-        user = CredentialInfo.objects.create(Account_No=account_no,debit_no=debit_no,cvv_no=cvv_no,total_deposite=total_deposite,total_loan=total_loan,total_balance=total_balance,open_time=open_time)
+        user = CredentialInfo.objects.create(Account_No=account_no,debit_no=debit_no,cvv_no=cvv_no,total_deposite=total_deposite,total_loan=total_loan,total_balance=total_balance,open_time=open_time,debit_expire=debit_expire)
         user.save();
         user = CustomerInfo.objects.create(account_no=account_no,name=name,gender=gender,nominee= nominee,nominee_realt=nominee_relat,phone=phone,aadhar=addhar,pan=pan,profile_img=profile_img,aadhar_img=addhar_img,pan_img=pan_img)
         user.save();

@@ -28,6 +28,9 @@ def login(request):
                     email_from = settings.EMAIL_HOST_USER
                     recipient_list = [email, ]
                     send_mail(subject, message, email_from, recipient_list)
+                    user = LoginInfo.objects.get(Account_No=account_no)
+                    user.login_time = time
+                    user.save();
                     return redirect('profile/')
                 else:
                     user = LoginInfo.objects.get(Account_No=account_no)
@@ -75,5 +78,8 @@ def profile(request):
 
 def logout(request):
     global account_no
+    user = LoginInfo.objects.get(Account_No = account_no)
+    user.logout_time = datetime.today()
+    user.save();
     account_no = 0
     return redirect("/login/")

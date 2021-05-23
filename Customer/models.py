@@ -8,9 +8,12 @@ class CredentialInfo(models.Model):
     total_loan = models.FloatField()
     total_balance = models.FloatField()
     open_time = models.DateField()
+    debit_expire = models.DateField()
 
 class LoginInfo(models.Model):
     Account_No = models.CharField(max_length=9)
     login_id = models.CharField(max_length=150)
     password = models.CharField(max_length=150)
     email = models.EmailField()
+    login_time = models.DateTimeField()
+    logout_time = models.DateTimeField()
