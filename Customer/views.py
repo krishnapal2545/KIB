@@ -76,4 +76,4 @@ def profile(request):
 def logout(request):
     global account_no
     account_no = 0
-    redirect("/")
+    return redirect("/login/")
