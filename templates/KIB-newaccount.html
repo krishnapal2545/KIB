@@ -2,192 +2,222 @@
 {%include 'main.html'%}
 <!DOCTYPE html>
 <html>
+
 <head>
   <title>New-Account</title>
-<style>
-body {
-  font-family: Arial, Helvetica, sans-serif;
-  background-color: white;
-  }
-#in{
-    width: 100%;
-    padding: 12px;
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    box-sizing: border-box;
-    margin-top: 6px;
-    margin-bottom: 16px;
-    resize: vertical;
-  }
-input{
-    border: 1px solid #aaaaaa;
-  }
-input.invalid {
-    background-color: #f5d4d4;
-  }
-#b {
-  border-radius: 10px;
-  }
-button:hover{
-  opacity: 2;
-}
-button:hover{
-  opacity: 2;
-}
-.container {
-  border-radius: 20px;
-  background-color: #ece7e7;
-  padding: 50px;
-}
-.tab{
-  display: none;
-}
-#regForm{
-  background-color: #f2f2f2;
-}
-.step {
-  height: 15px;
-  width: 15px;
-  background-color: #bbbbbb;
-  border: none;  
-  border-radius: 50%;
-  display: inline-block;
-  opacity: 0.5;
-}
+  <style>
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background-color: white;
+    }
 
-.step.active {
-  opacity: 1;
-}
-.step.finish {
-  background-color: #045faa;
-}
-</style>
+    #in {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      box-sizing: border-box;
+      margin-top: 6px;
+      margin-bottom: 16px;
+      resize: vertical;
+    }
+
+    input {
+      border: 1px solid #aaaaaa;
+    }
+
+    input.invalid {
+      background-color: #f5d4d4;
+    }
+
+    #b {
+      border-radius: 10px;
+    }
+
+    button:hover {
+      opacity: 2;
+    }
+
+    button:hover {
+      opacity: 2;
+    }
+
+    .container {
+      border-radius: 20px;
+      background-color: #ece7e7;
+      padding: 50px;
+    }
+
+    .tab {
+      display: none;
+    }
+
+    #regForm {
+      background-color: #f2f2f2;
+    }
+
+    .step {
+      height: 15px;
+      width: 15px;
+      background-color: #bbbbbb;
+      border: none;
+      border-radius: 50%;
+      display: inline-block;
+      opacity: 0.5;
+    }
+
+    .step.active {
+      opacity: 1;
+    }
+
+    .step.finish {
+      background-color: #045faa;
+    }
+  </style>
 </head>
+
 <body>
-{%block content %}
-<div class="alert alert-primary" role="alert" style="padding:0px">
-  <marquee>This Webpage is a Project of Mr.KrishnaKumar Pal.It's a demo Webpage not an Official bank.</marquee>
-</div>
-{% for message in messages %}
-<div class="container-fluid p-0">
-  <div class="alert {{ message.tags }} alert-dismissible" role="alert" style="text-align: center;">
-    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-      <span aria-hidden="true">&times;</span>
-    </button>
-    {{ message }}
+  {%block content %}
+  <div class="alert alert-primary" role="alert" style="padding:0px">
+    <marquee>This Webpage is a Project of Mr.KrishnaKumar Pal.It's a demo Webpage not an Official bank.</marquee>
   </div>
-</div>
-{% endfor %}
-<div class="card mb-3" style="max-width: 800px; margin:auto; border-radius:15px; padding: 10px; background-color: #f2f2f2; ">
-  <div class="row g-0">
-    <form method='POST' id="regForm" enctype="multipart/form-data"> {% csrf_token %}
-      <h3 style="text-align: center;">Registration Form</h3>
-      <div class="tab">
-        <b>Account Type : </b><select id="in" name="account" ><option value="saving">Saving-Account</option><option value="current">Current-Account</option></select><br>
-        <b>Fullname : </b><input id='in'type="text" placeholder="Enter Full name" name="name" required><br>
-        <b>Mothername : </b><input id='in' type="text" placeholder="Enter Mother name" name="mname" required><br>
-      </div>
-      <div class="tab">
-        <b>Gender : </b><select id="in" name="gender"><option value="others">Others</option><option value="male">Male</option><option value="female">Female</option><option value="lgbt">LGBT</option></select><br>
-        <b>Date Of Birth : </b></label><input id='in'type="date" placeholder="Enter Date of birth" name="bdate" required><br>
-        <b>Birth Place : </b><input id='in'type="text" placeholder="Enter your place of birth" name="bplace" required>
-      </div>
-      <div class="tab">
-        <b>Nominee : </b><input id='in'type="text" placeholder="Enter Name of your Nominee" name="nominee" required>
-        <b>Relation : </b></label><input id='in'type="text" placeholder="Enter Your relation with your Nominee" name="nominee_relat" required><br>
-        <b>Phone  : </b><input id='in'type="text" placeholder="Enter Mobile/Phone number" name="phone" required>
-      </div>
-      <div class="tab">
-        <b>Email ID :  </b><input id='in'type="email" placeholder="Enter Email/Gmail ID" name="email" required><br>
-        <b>Addhar  : </b><input id='in'type="text" placeholder="Enter Your Addhar number" name="addhar" required>
-        <b>PANCard : </b><input id='in'type="text" placeholder="Enter Your PAN card number" name="pan" required><br>
-      </div>
-      <div class="tab">
-        <b>Profile Photo: </b><input id='in'type="file" id="img" name="profile_img" accept="image/*" required>
-        <b>Addhar Card: </b><input id='in'type="file" id="img" name="addhar_img" accept="image/*" required>
-        <b>PAN  Card:</b><input id='in'type="file" id="img" name="pan_img" accept="image/*" required><br>
-      </div>
-      <div class="tab">
-        <b>New Username: </b><input id='in'type="text" placeholder="Enter your new login id" name="loginid" required>
-        <b>New Password: </b><input id='in'type="password" placeholder="Enter your new password" name="password" required>
-        <b>Confirm Password: </b><input id='in'type="password" placeholder="Enter your password again" name="password2" required>
-      </div>
-      <div style="overflow:auto;">
-          <button type="button"class="btn btn-primary" id="prevBtn" onclick="nextPrev(-1)"style="border-radius: 15px; ">Previous</button>
-          <button type="button"class="btn btn-primary" id="nextBtn" onclick="nextPrev(1)"style="border-radius: 15px;width:120px;float:right">Next</button>
-      </div>
-      <div style="text-align:center;">
-        <span class="step"></span>
-        <span class="step"></span>
-        <span class="step"></span>
-        <span class="step"></span>
-        <span class="step"></span>
-        <span class="step"></span>
-      </div>
-  </form>
+  {% for message in messages %}
+  <div class="container-fluid p-0">
+    <div class="alert {{ message.tags }} alert-dismissible" role="alert" style="text-align: center;">
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+      {{ message }}
+    </div>
   </div>
-</div>
-<script>
-  var firstTab = 0;
-  Tab(firstTab);
-  function Tab(n){
-    var t = document.getElementsByClassName("tab");
-    t[n].style.display = "block";
-    if (n == 0) {
-      document.getElementById("prevBtn").style.display = "none";
-    } else {
-      document.getElementById("prevBtn").style.display = "inline";
-      document.getElementById("prevBtn").innerHTML = "<< Previous";
-    }
-    if (n == (t.length - 1)) {
-      document.getElementById("nextBtn").innerHTML = "Apply";
-    } else {
-      document.getElementById("nextBtn").innerHTML = "Next >>";
-    }
-    StepIndicator(n)
-  }
-  function nextPrev(n) {
-    var x = document.getElementsByClassName("tab");
-    if (n == 1 && !validate()) return false;
-    x[firstTab].style.display = "none";
-    firstTab = firstTab + n;
-    if (firstTab >= 6) {
-       document.getElementById("regForm").submit();
-       return false;
-    }
+  {% endfor %}
+  <div class="card mb-3"
+    style="max-width: 800px; margin:auto; border-radius:15px; padding: 10px; background-color: #f2f2f2; ">
+    <div class="row g-0">
+      <form method='POST' id="regForm" enctype="multipart/form-data"> {% csrf_token %}
+        <h3 style="text-align: center;">Registration Form</h3>
+        <div class="tab">
+          <b>Account Type : </b><select id="in" name="account">
+            <option value="saving">Saving-Account</option>
+            <option value="current">Current-Account</option>
+          </select><br>
+          <b>Fullname : </b><input id='in' type="text" placeholder="Enter Full name" name="name" required><br>
+          <b>Mothername : </b><input id='in' type="text" placeholder="Enter Mother name" name="mname" required><br>
+        </div>
+        <div class="tab">
+          <b>Gender : </b><select id="in" name="gender">
+            <option value="others">Others</option>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+            <option value="lgbt">LGBT</option>
+          </select><br>
+          <b>Date Of Birth : </b></label><input id='in' type="date" placeholder="Enter Date of birth" name="bdate"
+            required><br>
+          <b>Birth Place : </b><input id='in' type="text" placeholder="Enter your place of birth" name="bplace"
+            required>
+        </div>
+        <div class="tab">
+          <b>Nominee : </b><input id='in' type="text" placeholder="Enter Name of your Nominee" name="nominee" required>
+          <b>Relation : </b></label><input id='in' type="text" placeholder="Enter Your relation with your Nominee"
+            name="nominee_relat" required><br>
+          <b>Phone : </b><input id='in' type="text" placeholder="Enter Mobile/Phone number" name="phone" required>
+        </div>
+        <div class="tab">
+          <b>Email ID : </b><input id='in' type="email" placeholder="Enter Email/Gmail ID" name="email" required><br>
+          <b>Addhar No.: </b><input id='in' type="text" placeholder="Enter Your Addhar number" name="addhar" required>
+          <b>PAN No. : </b><input id='in' type="text" placeholder="Enter Your PAN card number" name="pan" required><br>
+        </div>
+        <div class="tab">
+          <b>Profile Photo: </b><input id='in' type="file" id="img" name="profile_img" accept="image/*" required>
+          <b>Addhar Card: </b><input id='in' type="file" id="img" name="addhar_img" accept="image/*" required>
+          <b>PAN Card:</b><input id='in' type="file" id="img" name="pan_img" accept="image/*" required><br>
+        </div>
+        <div class="tab">
+          <b>New Username: </b><input id='in' type="text" placeholder="Enter your new login id" name="loginid" required>
+          <b>New Password: </b><input id='in' type="password" placeholder="Enter your new password" name="password"
+            required>
+          <b>Confirm Password: </b><input id='in' type="password" placeholder="Enter your password again"
+            name="password2" required>
+        </div>
+        <div style="overflow:auto;">
+          <button type="button" class="btn btn-primary" id="prevBtn" onclick="nextPrev(-1)"
+            style="border-radius: 15px; ">Previous</button>
+          <button type="button" class="btn btn-primary" id="nextBtn" onclick="nextPrev(1)"
+            style="border-radius: 15px;width:120px;float:right">Next</button>
+        </div>
+        <div style="text-align:center;">
+          <span class="step"></span>
+          <span class="step"></span>
+          <span class="step"></span>
+          <span class="step"></span>
+          <span class="step"></span>
+          <span class="step"></span>
+        </div>
+      </form>
+    </div>
+  </div>
+  <script>
+    var firstTab = 0;
     Tab(firstTab);
-  }
-  function validate() {
-    var x, y, i, valid = true;
-    x = document.getElementsByClassName("tab");
-    y = x[firstTab].getElementsByTagName("input");
-    for (i = 0; i < y.length; i++) {
-      if (y[i].value == "") {
-        y[i].className += " invalid";
-        valid = false;
+    function Tab(n) {
+      var t = document.getElementsByClassName("tab");
+      t[n].style.display = "block";
+      if (n == 0) {
+        document.getElementById("prevBtn").style.display = "none";
+      } else {
+        document.getElementById("prevBtn").style.display = "inline";
+        document.getElementById("prevBtn").innerHTML = "<< Previous";
       }
-    }
-    if(firstTab == 5){
-      if (y[y.length-2].value!=y[y.length-1].value){
-        y[y.length-2].className += "invalid";
-        y[y.length-1].className += "invalid";
-        valid = false
+      if (n == (t.length - 1)) {
+        document.getElementById("nextBtn").innerHTML = "Apply";
+      } else {
+        document.getElementById("nextBtn").innerHTML = "Next >>";
       }
+      StepIndicator(n)
     }
-    if (valid) {
-      document.getElementsByClassName("step")[firstTab].className += " finish";
+    function nextPrev(n) {
+      var x = document.getElementsByClassName("tab");
+      if (n == 1 && !validate()) return false;
+      x[firstTab].style.display = "none";
+      firstTab = firstTab + n;
+      if (firstTab >= 6) {
+        document.getElementById("regForm").submit();
+        return false;
+      }
+      Tab(firstTab);
     }
-    return valid;
-  }
-  
-  function StepIndicator(n) {
-    var i, x = document.getElementsByClassName("step");
-    for (i = 0; i < x.length; i++) {
-      x[i].className = x[i].className.replace(" active", "");
+    function validate() {
+      var x, y, i, valid = true;
+      x = document.getElementsByClassName("tab");
+      y = x[firstTab].getElementsByTagName("input");
+      for (i = 0; i < y.length; i++) {
+        if (y[i].value == "") {
+          y[i].className += " invalid";
+          valid = false;
+        }
+      }
+      if (firstTab == 5) {
+        if (y[y.length - 2].value != y[y.length - 1].value) {
+          y[y.length - 2].className += "invalid";
+          y[y.length - 1].className += "invalid";
+          valid = false
+        }
+      }
+      if (valid) {
+        document.getElementsByClassName("step")[firstTab].className += " finish";
+      }
+      return valid;
     }
-    x[n].className += " active";
-  }
-</script>
-{%endblock%}
+
+    function StepIndicator(n) {
+      var i, x = document.getElementsByClassName("step");
+      for (i = 0; i < x.length; i++) {
+        x[i].className = x[i].className.replace(" active", "");
+      }
+      x[n].className += " active";
+    }
+  </script>
+  {%endblock%}
 </body>
+
 </html>

@@ -14,4 +14,3 @@ class LoginInfo(models.Model):
     login_id = models.CharField(max_length=150)
     password = models.CharField(max_length=150)
     email = models.EmailField()
-    

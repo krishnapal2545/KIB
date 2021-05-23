@@ -2,162 +2,166 @@
 
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <title>DashBoard</title>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-        <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
-        <link rel = "icon" href="{% static 'images\KIB-icon.png' %}" type = "image/x-icon">
-        <style>
-          #in{
-            width: 100%;
-            padding: 12px;
-            border: 1px solid #ccc;
-            border-radius: 10px;
-            box-sizing: border-box;
-            margin-top: 6px;
-            margin-bottom: 16px;
-            resize: vertical;
-          }
-          .tab{
-            display: none;
-          }
-        </style>
-    </head>
-    <nav class="navbar navbar-expand-lg navbar-light " style="background-color: #ffffff;" role="navigation " >
-      <div class="container-fluid">
-        <a class="navbar-brand" href="">
-          <img src="{% static 'images\KIB-mg.jfif' %}" alt="" width="195" height="75" class="d-inline-block align-text-top">
-        </a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNavDropdown" style="position: static;">
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="">Profile</a>
+
+<head>
+  <title>DashBoard</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+  <link rel="icon" href="{% static 'images\KIB-icon.png' %}" type="image/x-icon">
+  <style>
+    #in {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      box-sizing: border-box;
+      margin-top: 6px;
+      margin-bottom: 16px;
+      resize: vertical;
+    }
+
+    .tab {
+      display: none;
+    }
+  </style>
+</head>
+<nav class="navbar navbar-expand-lg navbar-light " style="background-color: #ffffff;" role="navigation ">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="">
+      <img src="{% static 'images\KIB-mg.jfif' %}" alt="" width="195" height="75" class="d-inline-block align-text-top">
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+      aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown" style="position: static;">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="/login/profile/">Profile</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link " href="#">Loan & FD</a>
+        </li>
+        <div id="navbarCollapse" class="collapse navbar-collapse" style="position: static;">
+          <ul class="nav navbar-nav">
+            <li class="nav-item dropdown">
+              <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Bank-Card</a>
+              <div class="dropdown-menu">
+                <a href="#" class="dropdown-item">Debit Card</a>
+                <a href="#" class="dropdown-item">Credit Card</a>
+                <a href="#" class="dropdown-item">Master Card</a>
+              </div>
             </li>
-            <li class="nav-item">
-              <a class="nav-link " href="#" >Loan & FD</a>
-            </li>
-            <div id="navbarCollapse" class="collapse navbar-collapse" style="position: static;" >
-              <ul class="nav navbar-nav">
-                  <li class="nav-item dropdown">
-                      <a href="" class="nav-link dropdown-toggle" data-toggle="dropdown">Bank-Card</a>
-                      <div class="dropdown-menu">
-                          <a href="" class="dropdown-item">Debit Card</a>
-                          <a href="" class="dropdown-item">Credit Card</a>
-                          <a href="" class="dropdown-item">Master Card</a>
-                      </div>
-                  </li>
-              </ul>
-          </div>
-          <li class="nav-item">
-            <a class="nav-link " href="" >Log Out</a>
-          </li>
           </ul>
-          <form class="d-flex">
-            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success" type="submit">Search</button>
-          </form>
         </div>
-      </div>
-    </nav>
-<body>
-    <div class="card mb-3" style="max-width: 100%;">
-        <div class="row g-0">
-          <div class="col-md-4">
-            <img src="/media/{{User.profile_img}}" style="width: 50%; border-radius:10%;" >
-          </div>
-          <div class="col-md-8">
-            <nav class="nav nav-pills nav-fill">
-              <button type="button"class="btn btn-primary" id="account"style="border-radius: 10px; width:30%; margin:1%" onclick="Accoun(0)">Account</button>
-              <button type="button"class="btn btn-primary" id="personal"style="border-radius: 10px;width:30%;margin:1%" onclick="Personal(1)">Personal</button>
-              <button type="button"class="btn btn-primary" id="document"style="border-radius: 10px;width:30%;margin:1%" onclick="Documen(2)">Document</button>
-            </nav>
-            <div class="tab" id="account">
-              <b>Fullname : </b><input id='in'type="text" value="{{User.name}}" name="name" readonly><br>
-              <b>Account No.: </b><input id='in'type="text" value="{{Customer.Account_No}}" name="name" readonly><br>
-              <b>DebitCard No.: </b><input id='in'type="text" value="{{Customer.debit_no}}" name="name" readonly><br>
-              <b>CVV No.: </b><input id='in'type="text" value="{{Customer.cvv_no}}" name="name" readonly><br>
-              <b>Total Deposite : </b><input id='in'type="text" value="${{Customer.total_deposite}}" name="name" readonly><br>
-              <b>Total Loan : </b><input id='in'type="text" value="${{Customer.total_loan}}" name="name" readonly><br>
-              <b>Total Loan Balance : </b><input id='in'type="text" value="${{Customer.total_balance}}" name="name" readonly><br>
-              <b>Account Open Date : </b><input id='in'type="text" value="{{Customer.open_time}}" name="name" readonly><br>
-            </div>
-            <div class="tab" id="account">
-              <b>Fullname 1: </b><input id='in'type="text" value="{{User.name}}" name="name" readonly><br>
-              <b>Account No.: </b><input id='in'type="text" value="{{Customer.Account_No}}" name="name" readonly><br>
-              <b>DebitCard No.: </b><input id='in'type="text" value="{{Customer.debit_no}}" name="name" readonly><br>
-              <b>CVV No.: </b><input id='in'type="text" value="{{Customer.cvv_no}}" name="name" readonly><br>
-              <b>Total Deposite : </b><input id='in'type="text" value="${{Customer.total_deposite}}" name="name" readonly><br>
-              <b>Total Loan : </b><input id='in'type="text" value="${{Customer.total_loan}}" name="name" readonly><br>
-              <b>Total Loan Balance : </b><input id='in'type="text" value="${{Customer.total_balance}}" name="name" readonly><br>
-              <b>Account Open Date : </b><input id='in'type="text" value="{{Customer.open_time}}" name="name" readonly><br>
-            </div>
-            <div class="tab" id="account">
-              <b>Fullname 2 : </b><input id='in'type="text" value="{{User.name}}" name="name" readonly><br>
-              <b>Account No.: </b><input id='in'type="text" value="{{Customer.Account_No}}" name="name" readonly><br>
-              <b>DebitCard No.: </b><input id='in'type="text" value="{{Customer.debit_no}}" name="name" readonly><br>
-              <b>CVV No.: </b><input id='in'type="text" value="{{Customer.cvv_no}}" name="name" readonly><br>
-              <b>Total Deposite : </b><input id='in'type="text" value="${{Customer.total_deposite}}" name="name" readonly><br>
-              <b>Total Loan : </b><input id='in'type="text" value="${{Customer.total_loan}}" name="name" readonly><br>
-              <b>Total Loan Balance : </b><input id='in'type="text" value="${{Customer.total_balance}}" name="name" readonly><br>
-              <b>Account Open Date : </b><input id='in'type="text" value="{{Customer.open_time}}" name="name" readonly><br>
-            </div>
-            <a href="#" class="btn btn-primary">Edit Profile</a><br><br>
-              <h5>Virtual Bank Card</h5>
-              <button style="font-size:20px; border-radius:10px;"> <img src="{% static 'images/KIB-icon.png'%}" style="width: 20%; "> KIB-Bank <i class="fa fa-cc-visa"></i>
-              <p> {{Customer.debit_no}} </p>
-              <p>{{User.name}}</p>
-              </button>
-          </div>
-          </div>
+        <li class="nav-item">
+          <a class="nav-link " href="logout/">Log Out</a>
+        </li>
+      </ul>
+      <form class="d-flex">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success" type="submit">Search</button>
+      </form>
     </div>
-    <script>
-      var first=0;
-      Tab(first);
-      function Tab(n){
-        var x = document.getElementsByClassName("tab");
-        x[n].style.display = "block";
-        if (n==0){
-          document.getElementById("account").style.backgroundColor = "green"
-          document.getElementById("personal").style.backgroundColor = "blue"
-          document.getElementById("document").style.backgroundColor = "blue"
-        }
-        if (n==1){
-          document.getElementById("account").style.backgroundColor = "blue"
-          document.getElementById("personal").style.backgroundColor = "green"
-          document.getElementById("document").style.backgroundColor = "blue"          
-        }
-        if (n==2){
-          document.getElementById("account").style.backgroundColor = "blue"
-          document.getElementById("personal").style.backgroundColor = "blue"
-          document.getElementById("document").style.backgroundColor = "green"
-        }
+  </div>
+</nav>
+
+<body>
+  <div class="card mb-3" style="max-width: 100%;">
+    <div class="row g-0">
+      <div class="col-md-4">
+        <img src="/media/{{User.profile_img}}" style="width: 50%; border-radius:10%;">
+      </div>
+      <div class="col-md-8">
+        <nav class="nav nav-pills nav-fill">
+          <button type="button" class="btn btn-primary" id="account" style="border-radius: 10px; width:30%; margin:1%"
+            onclick="Accoun(0)">Account</button>
+          <button type="button" class="btn btn-primary" id="personal" style="border-radius: 10px;width:30%;margin:1%"
+            onclick="Personal(1)">Personal</button>
+          <button type="button" class="btn btn-primary" id="document" style="border-radius: 10px;width:30%;margin:1%"
+            onclick="Documen(2)">Document</button>
+        </nav>
+        <div class="tab" id="account">
+          <b>Account No.: </b><input id='in' type="text" value="{{Customer.Account_No}}" name="name" readonly><br>
+          <b>DebitCard No.: </b><input id='in' type="text" value="{{Customer.debit_no}}" name="name" readonly><br>
+          <b>CVV No.: </b><input id='in' type="text" value="{{Customer.cvv_no}}" name="name" readonly><br>
+          <b>Total Deposite : </b><input id='in' type="text" value="${{Customer.total_deposite}}" name="name"
+            readonly><br>
+          <b>Total Loan : </b><input id='in' type="text" value="${{Customer.total_loan}}" name="name" readonly><br>
+          <b>Total Loan Balance : </b><input id='in' type="text" value="${{Customer.total_balance}}" name="name"
+            readonly><br>
+          <b>Account Open Date : </b><input id='in' type="text" value="{{Customer.open_time}}" name="name" readonly><br>
+        </div>
+        <div class="tab" id="personal">
+          <b>Fullname : </b><input id='in' type="text" value="{{User.name}}" name="name" readonly><br>
+          <b>Gender: </b><input id='in' type="text" value="{{User.gender}}" name="name" readonly><br>
+          <b>Nominee: </b><input id='in' type="text" value="{{User.nominee}}" name="name" readonly><br>
+          <b>Phone No.: </b><input id='in' type="text" value="{{User.phone}}" name="name" readonly><br>
+          <b>Email: </b><input id='in' type="text" value="{{Log.email}}" name="name" readonly><br>
+        </div>
+        <div class="tab" id="document">
+          <b>Aadhar Number : </b><input id='in' type="text" value="{{User.aadhar}}" name="name" readonly><br>
+          <b>PAN Number: </b><input id='in' type="text" value="{{User.pan}}" name="name" readonly><br>
+          <b>Aadhar Card: </b><br><img src="/media/{{User.aadhar_img}}" style="border-radius: 8px; max-width:100%"><br>
+          <b>PAN Card: </b><br><img src="/media/{{User.pan_img}}" style="border-radius: 8px;max-width:80%"><br>
+        </div>
+        <a href="#" class="btn btn-primary" style="margin-left: 100px;">Edit Profile</a><br><br>
+        <h5>Virtual Bank Card</h5>
+        <button style="font-size:20px; border-radius:10px;"> <img src="{% static 'images/KIB-icon.png'%}"
+            style="width: 20%; "> KIB-Bank <i class="fa fa-cc-visa"></i>
+          <p> {{Customer.debit_no}} </p>
+          <p>{{User.name}}</p>
+        </button>
+      </div>
+    </div>
+  </div>
+  <script>
+    var first = 0;
+    Tab(first);
+    function Tab(n) {
+      var x = document.getElementsByClassName("tab");
+      x[n].style.display = "block";
+      if (n == 0) {
+        document.getElementById("account").style.backgroundColor = "green"
+        document.getElementById("personal").style.backgroundColor = "blue"
+        document.getElementById("document").style.backgroundColor = "blue"
       }
-      function Accoun(n){
-          var x = document.getElementsByClassName("tab");
-          x[first].style.display ="none";
-          first = n ;
-          Tab(n)
+      if (n == 1) {
+        document.getElementById("account").style.backgroundColor = "blue"
+        document.getElementById("personal").style.backgroundColor = "green"
+        document.getElementById("document").style.backgroundColor = "blue"
       }
-      function Personal(n){
-        var x = document.getElementsByClassName("tab");
-        x[first].style.display ="none";
-        first = n ;
-        Tab(n)
+      if (n == 2) {
+        document.getElementById("account").style.backgroundColor = "blue"
+        document.getElementById("personal").style.backgroundColor = "blue"
+        document.getElementById("document").style.backgroundColor = "green"
       }
-      function Documen(n){
-        var x = document.getElementsByClassName("tab");
-        x[first].style.display ="none";
-        first = n ;
-        Tab(n)
-      }
-    </script>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    }
+    function Accoun(n) {
+      var x = document.getElementsByClassName("tab");
+      x[first].style.display = "none";
+      first = n;
+      Tab(n)
+    }
+    function Personal(n) {
+      var x = document.getElementsByClassName("tab");
+      x[first].style.display = "none";
+      first = n;
+      Tab(n)
+    }
+    function Documen(n) {
+      var x = document.getElementsByClassName("tab");
+      x[first].style.display = "none";
+      first = n;
+      Tab(n)
+    }
+  </script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
 </body>
+
 </html>

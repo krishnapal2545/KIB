@@ -1,62 +1,67 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-        <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
-        <link rel = "icon" href="{% static 'images\KIB-icon.png' %}" type = "image/x-icon">
-        <style>
-         
-        </style>
-    </head>
-    <nav class="navbar navbar-expand-lg navbar-light " style="background-color: #ffffff;" role="navigation" >
-        <div class="container-fluid">
-          <a class="navbar-brand" href="">
-            <img src="{% static 'images\KIB-mg.jfif' %}" alt="" width="195" height="75" class="d-inline-block align-text-top">
-          </a>
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarNavDropdown" style="position: static;">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-              <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="/">Home</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="https://online-kib.herokuapp.com/login/">Login</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link " href="https://online-kib.herokuapp.com/newaccount/" >NewAccount</a>
-              </li>
-              <div id="navbarCollapse" class="collapse navbar-collapse" style="position: static;" >
-                <ul class="nav navbar-nav">
-                    <li class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">KIB-Bank</a>
-                        <div class="dropdown-menu">
-                            <a href="" class="dropdown-item">Documents</a>
-                            <a href="#" class="dropdown-item">Facilites</a>
-                            <div class="dropdown-divider"></div>
-                            <a href="#"class="dropdown-item">Terms & Condition</a>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-            </ul>
-            <form class="d-flex">
-              <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-              <button class="btn btn-outline-success" type="submit">Search</button>
-            </form>
-          </div>
-        </div>
-      </nav>
-    <body>
-        {% block content%}
 
-        {%endblock%}
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
-    </body>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+  <link rel="icon" href="{% static 'images\KIB-icon.png' %}" type="image/x-icon">
+  <style>
+
+  </style>
+</head>
+<nav class="navbar navbar-expand-lg navbar-light " style="background-color: #ffffff;" role="navigation">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="">
+      <img src="{% static 'images\KIB-mg.jfif' %}" alt="" width="195" height="75" class="d-inline-block align-text-top">
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+      aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown" style="position: static;">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="home/">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/login/">Login</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link " href="/newaccount/">NewAccount</a>
+        </li>
+        <div id="navbarCollapse" class="collapse navbar-collapse" style="position: static;">
+          <ul class="nav navbar-nav">
+            <li class="nav-item dropdown">
+              <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">KIB-Bank</a>
+              <div class="dropdown-menu">
+                <a href="" class="dropdown-item">Documents</a>
+                <a href="#" class="dropdown-item">Facilites</a>
+                <div class="dropdown-divider"></div>
+                <a href="#" class="dropdown-item">Terms & Condition</a>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </ul>
+      <form class="d-flex">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success" type="submit">Search</button>
+      </form>
+    </div>
+  </div>
+</nav>
+
+<body>
+  {% block content%}
+
+  {%endblock%}
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+</body>
+
 </html>

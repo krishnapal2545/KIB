@@ -1,6 +1,6 @@
 from django.db import models
 
-class CustomerInfo (models.Model):
+class CustomerInfo(models.Model):
     account_no = models.CharField(max_length=9)
     name = models.CharField(max_length=255)
     gender = models.CharField(max_length=255)
