@@ -120,12 +120,12 @@
           <b>Nominee : </b><input id='in' type="text" placeholder="Enter Name of your Nominee" name="nominee" required>
           <b>Relation : </b></label><input id='in' type="text" placeholder="Enter Your relation with your Nominee"
             name="nominee_relat" required><br>
-          <b>Phone : </b><input id='in' type="text" placeholder="Enter Mobile/Phone number" name="phone" required>
+          <b>Phone : </b><input id='in' type="tel" pattern="[+][0-9]{11,13}" title="e.g. +913245678194" placeholder="Enter Mobile/Phone number with countryCode" name="phone" required>
         </div>
         <div class="tab">
-          <b>Email ID : </b><input id='in' type="email" placeholder="Enter Email/Gmail ID" name="email" required><br>
-          <b>Addhar No.: </b><input id='in' type="text" placeholder="Enter Your Addhar number" name="addhar" required>
-          <b>PAN No. : </b><input id='in' type="text" placeholder="Enter Your PAN card number" name="pan" required><br>
+          <b>Email ID : </b><input id='in' type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" title="e.g. name@example.com" placeholder="Enter Email/Gmail ID" name="email" required><br>
+          <b>Addhar No.: </b><input id='in' type="text" pattern="(?=.*[0-9]).{12}" title=" aadhar card have 12 numbers only" placeholder="Enter Your Addhar number" name="addhar" required>
+          <b>PAN No. : </b><input id='in' type="text" pattern="(?=.*[0-9])(?=.*[A-Z]).{10}"  placeholder="Enter Your PAN card number" name="pan" required><br>
         </div>
         <div class="tab">
           <b>Profile Photo: </b><input id='in' type="file" id="img" name="profile_img" accept="image/*" required>
@@ -134,9 +134,9 @@
         </div>
         <div class="tab">
           <b>New Username: </b><input id='in' type="text" placeholder="Enter your new login id" name="loginid" required>
-          <b>New Password: </b><input id='in' type="password" placeholder="Enter your new password" name="password"
+          <b>New Password: </b><input id='in' type="password" pattern=".{8}" title=" Should Contaion Only 8 Characters" placeholder="Enter your new password" name="password"
             required>
-          <b>Confirm Password: </b><input id='in' type="password" placeholder="Enter your password again"
+          <b>Confirm Password: </b><input id='in' type="password"  pattern=".{8}" title="Must match to the above password" placeholder="Enter your password again"
             name="password2" required>
         </div>
         <div style="overflow:auto;">
