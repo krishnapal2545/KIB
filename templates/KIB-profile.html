@@ -1,4 +1,5 @@
 {% load static %}
+{% include 'profile-main.html' %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -6,12 +7,6 @@
 <head>
   <title>DashBoard</title>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
-  <link rel="icon" href="{% static 'images\KIB-icon.png' %}" type="image/x-icon">
   <style>
     #in {
       width: 100%;
@@ -78,48 +73,18 @@
     }
   </style>
 </head>
-<nav class="navbar navbar-expand-lg navbar-light " style="background-color: #ffffff;" role="navigation ">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="">
-      <img src="{% static 'images\KIB-mg.jfif' %}" alt="" width="195" height="75" class="d-inline-block align-text-top">
-    </a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
-      aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNavDropdown" style="position: static;">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="/login/profile/">Profile</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link " href="#">Loan & FD</a>
-        </li>
-        <div id="navbarCollapse" class="collapse navbar-collapse" style="position: static;">
-          <ul class="nav navbar-nav">
-            <li class="nav-item dropdown">
-              <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Bank-Card</a>
-              <div class="dropdown-menu">
-                <a href="#" class="dropdown-item">Debit Card</a>
-                <a href="#" class="dropdown-item">Credit Card</a>
-                <a href="#" class="dropdown-item">Master Card</a>
-              </div>
-            </li>
-          </ul>
-        </div>
-        <li class="nav-item">
-          <a class="nav-link " href="logout/">Log Out</a>
-        </li>
-      </ul>
-      <form class="d-flex">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success" type="submit">Search</button>
-      </form>
+<body>
+  {% block content %}
+  {% for message in messages %}
+  <div class="container-fluid p-0">
+    <div class="alert {{ message.tags }} alert-dismissible" role="alert" style="text-align: center; padding:10px;">
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+      {{ message }}
     </div>
   </div>
-</nav>
-
-<body>
+  {% endfor %}
   <div class="card mb-3" style="max-width: 100%;">
     <div class="row g-0">
       <div class="col-md-4">
@@ -143,6 +108,28 @@
           <b>Total Loan Balance : </b><input id='in' type="text" value="${{Customer.total_balance}}" name="name"
             readonly><br>
           <b>Account Open Date : </b><input id='in' type="text" value="{{Customer.open_time}}" name="name" readonly><br>
+          <div style="margin:1px 3px ;">
+            <div class="flip-card" style="border-radius: 10px;">
+              <div class="flip-card-inner" style="border-radius: 10px;">
+                <div class="flip-card-front" style="border-radius: 10px; padding:1px;">
+                  <h3 style="padding: 0%;">Virtual Debit Card</h3>
+                  <img src="{% static 'images/chip.png'%}"
+                    style="width: 15%; border-radius:10px; font-size:10px; padding:1%;">
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i
+                    class="fa fa-cc-visa fa-2x"></i><br>
+                  <p style="letter-spacing: 0.5px; padding:0%; display:inline;">Debit no. {{Customer.debit_no}} / </p>
+                  <p style="padding: 0%; display:inline;">{{Customer.debit_expire}}</p><br>
+                  <p style="padding-top:10px ;">{{User.name}}</p>
+                </div>
+                <div class="flip-card-back" style="border-radius: 10px;">
+                  <h3 style="padding: 0%;">Virtual Debit Card</h3>
+                  <img src="{% static 'images/debitback.png'%}" style="width: 100%;height:35px"><br>
+                  <img src="{% static 'images/cvvimg.png'%}" style="width: 85%;height:50px;padding: 8px 5px ;">{{Customer.cvv_no}}<br>
+                  <p style="font-weight: 500; margin-top:20px">www.onlinekib.herokuapp.com</p>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
         <div class="tab" id="personal">
           <b>Fullname : </b><input id='in' type="text" value="{{User.name}}" name="name" readonly><br>
@@ -154,32 +141,11 @@
         <div class="tab" id="document">
           <b>Aadhar Number : </b><input id='in' type="text" value="{{User.aadhar}}" name="name" readonly><br>
           <b>PAN Number: </b><input id='in' type="text" value="{{User.pan}}" name="name" readonly><br>
-          <b>Aadhar Card: </b><br><img src="/media/{{User.aadhar_img}}" style="border-radius: 8px; max-width:100%"><br>
-          <b>PAN Card: </b><br><img src="/media/{{User.pan_img}}" style="border-radius: 8px;max-width:80%"><br>
+          <b>Aadhar Card: </b><br><img src="/media/{{User.aadhar_img}}" style="border-radius: 8px; max-width:100%; max-height:500px;"><br>
+          <b>PAN Card: </b><br><img src="/media/{{User.pan_img}}" style="border-radius: 8px;max-width:100%; max-height:300px;"><br>
         </div>
-        <div style="margin:1px 3px ;">
-          <div class="flip-card" style="border-radius: 10px;">
-            <div class="flip-card-inner" style="border-radius: 10px;">
-              <div class="flip-card-front" style="border-radius: 10px; padding:1px;">
-                <h3 style="padding: 0%;">Virtual Debit Card</h3>
-                <img src="{% static 'images/chip.png'%}"
-                  style="width: 15%; border-radius:10px; font-size:10px; padding:1%;">
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i
-                  class="fa fa-cc-visa fa-2x"></i><br>
-                <p style="letter-spacing: 0.5px; padding:0%; display:inline;">Debit no. {{Customer.debit_no}} / </p>
-                <p style="padding: 0%; display:inline;">{{Customer.debit_expire}}</p><br>
-                <p style="padding-top:10px ;">{{User.name}}</p>
-              </div>
-              <div class="flip-card-back" style="border-radius: 10px;">
-                <h3 style="padding: 0%;">Virtual Debit Card</h3>
-                <img src="{% static 'images/debitback.png'%}" style="width: 100%;height:35px"><br>
-                <img src="{% static 'images/cvvimg.png'%}" style="width: 85%;height:50px;padding: 8px 5px ;">{{Customer.cvv_no}}<br>
-                <p style="font-weight: 500; margin-top:20px">www.onlinekib.herokuapp.com</p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <a href="#" class="btn btn-primary" style="margin-left: 100px;">Edit Profile</a><br><br>
+        
+        <a href="/login/profile/Edit/" class="btn btn-primary" style="margin-left: 100px;">Edit Profile</a><br><br>
       </div>
     </div>
   </div>
@@ -224,6 +190,7 @@
       Tab(n)
     }
   </script>
+  {% endblock %}
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
 </body>
