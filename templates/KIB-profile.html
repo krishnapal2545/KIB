@@ -135,8 +135,8 @@
           <b>Fullname : </b><input id='in' type="text" value="{{User.name}}" name="name" readonly><br>
           <b>Gender: </b><input id='in' type="text" value="{{User.gender}}" name="name" readonly><br>
           <b>Nominee: </b><input id='in' type="text" value="{{User.nominee}}" name="name" readonly><br>
-          <b>Phone No.: </b><input id='in' type="text" value="{{User.phone}}" name="name" readonly><br>
-          <b>Email: </b><input id='in' type="text" value="{{Log.email}}" name="name" readonly><br>
+          <b>{%if Log.verified == 1 %} &#9989; {% endif %} Phone No.: </b><input id='in' type="text" value="{{User.phone}}" name="name" readonly><br>
+          <b>{%if Log.verified == 1 %} &#9989; {% endif %}Email: </b><input id='in' type="text" value="{{Log.email}}" name="name" readonly><br>
         </div>
         <div class="tab" id="document">
           <b>Aadhar Number : </b><input id='in' type="text" value="{{User.aadhar}}" name="name" readonly><br>
