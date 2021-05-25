@@ -1,6 +1,6 @@
 from datetime import datetime
+from django.http.request import validate_host
 from . sms import sms
-import string
 from django.contrib import messages
 from django.shortcuts import redirect, render
 from NewAccount.models import CustomerInfo
@@ -9,12 +9,14 @@ from django.conf import settings
 from django.core.mail import send_mail
 import random ,string
 
+
+
 account_no = 0
 
 
 def login(request):
+    global account_no
     if request.method == 'POST':
-        global account_no
         account_no = request.POST['account_no']
         login_id = request.POST['login_id']
         password = request.POST['password']
@@ -69,6 +71,7 @@ def login(request):
 
 
 def profile(request):
+    global account_no
     if account_no:
         user = CustomerInfo.objects.get(account_no=account_no)
         customer = CredentialInfo.objects.get(Account_No=account_no)
@@ -79,14 +82,17 @@ def profile(request):
         messages.warning(request, Result)
         return redirect("/login/")
 
-
 def logout(request):
     global account_no
-    user = LoginInfo.objects.get(Account_No=account_no)
-    user.logout_time = datetime.today()
-    user.save()
-    account_no = 0
-    return redirect("/login/")
+    if account_no:
+       user = LoginInfo.objects.get(Account_No=account_no)
+       user.logout_time = datetime.today()
+       user.save()
+       account_no = 0
+       return render(request,'KIB-logout.html')
+    else:
+       return redirect("/login/")
+
 
 
 def edit(request):
@@ -149,6 +155,7 @@ def edit(request):
         messages.warning(request, Result)
         return redirect("/login/")
 
+
 emailotp=''.join(random.choices(string.digits,k=6))
 phoneotp=''.join(random.choices(string.digits,k=6))
 
@@ -156,19 +163,16 @@ phoneotp=''.join(random.choices(string.digits,k=6))
 def verify(request):
     global account_no
     if account_no:
-        user = LoginInfo.objects.get(Account_No=account_no)
-        email = user.email
         user = CustomerInfo.objects.get(account_no=account_no)
         phone = user.phone
+        user = LoginInfo.objects.get(Account_No=account_no)
+        email = user.email
         if request.method == 'POST':
             eotp = request.POST['email-otp']
             potp = request.POST['phone-otp']
-            print(f'{eotp},{potp}')
-            print(emailotp)
-            print(phoneotp)
             if eotp == emailotp and potp == phoneotp:
                   user.verified = 1
-                  user.save();
+                  user.save()
                   Result = 'Congratulations Your Account is Verified Now you can do all the transitions'
                   messages.success(request, Result)
                   return redirect('/login/profile/')  

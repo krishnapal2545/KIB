@@ -6,7 +6,7 @@ class CustomerInfo(models.Model):
     gender = models.CharField(max_length=255)
     nominee= models.CharField(max_length=255)
     nominee_realt = models.CharField(max_length=255)
-    phone = models.IntegerField()
+    phone = models.CharField(max_length=15)
     aadhar = models.IntegerField()
     pan = models.CharField(max_length=10)
     profile_img = models.ImageField(upload_to='profile_img/')

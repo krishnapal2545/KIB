@@ -120,12 +120,16 @@
           <b>Nominee : </b><input id='in' type="text" placeholder="Enter Name of your Nominee" name="nominee" required>
           <b>Relation : </b></label><input id='in' type="text" placeholder="Enter Your relation with your Nominee"
             name="nominee_relat" required><br>
-          <b>Phone : </b><input id='in' type="tel" pattern="[+][0-9]{11,13}" title="e.g. +913245678194" placeholder="Enter Mobile/Phone number with countryCode" name="phone" required>
+          <b>Phone : </b><input id='in' type="tel" title="e.g. +913245678194" value="+91"
+            placeholder="Enter Mobile/Phone number with countryCode" name="phone" required>
         </div>
         <div class="tab">
-          <b>Email ID : </b><input id='in' type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" title="e.g. name@example.com" placeholder="Enter Email/Gmail ID" name="email" required><br>
-          <b>Addhar No.: </b><input id='in' type="text" pattern="(?=.*[0-9]).{12}" title=" aadhar card have 12 numbers only" placeholder="Enter Your Addhar number" name="addhar" required>
-          <b>PAN No. : </b><input id='in' type="text" pattern="(?=.*[0-9])(?=.*[A-Z]).{10}"  placeholder="Enter Your PAN card number" name="pan" required><br>
+          <b>Email ID : </b><input id='in' type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+            title="e.g. name@example.com" placeholder="Enter Email/Gmail ID" name="email" required><br>
+          <b>Addhar No.: </b><input id='in' type="text" pattern="(?=.*[0-9]).{12}"
+            title=" aadhar card have 12 numbers only" placeholder="Enter Your Addhar number" name="addhar" required>
+          <b>PAN No. : </b><input id='in' type="text" title="e.g. AAAAA1234A"
+            placeholder="Enter Your PAN card number" name="pan" required><br>
         </div>
         <div class="tab">
           <b>Profile Photo: </b><input id='in' type="file" id="img" name="profile_img" accept="image/*" required>
@@ -134,10 +138,10 @@
         </div>
         <div class="tab">
           <b>New Username: </b><input id='in' type="text" placeholder="Enter your new Username" name="loginid" required>
-          <b>New Password: </b><input id='in' type="password" pattern=".{8}" title=" Should Contaion Only 8 Characters" placeholder="Enter your new password" name="password"
-            required>
-          <b>Confirm Password: </b><input id='in' type="password"  pattern=".{8}" title="Must match to the above password" placeholder="Enter your password again"
-            name="password2" required>
+          <b>New Password: </b><input id='in' type="password" pattern=".{8}" title=" Should Contaion Only 8 Characters"
+            placeholder="Enter your new password" name="password" required>
+          <b>Confirm Password: </b><input id='in' type="password" pattern=".{8}"
+            title="Must match to the above password" placeholder="Enter your password again" name="password2" required>
         </div>
         <div style="overflow:auto;">
           <button type="button" class="btn btn-primary" id="prevBtn" onclick="nextPrev(-1)"
@@ -158,6 +162,10 @@
   </div>
   <script>
     var firstTab = 0;
+    var mail = /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/;
+    var phon = /[0-9]{11,13}$/;
+    var adhar = /[0-9]{12}$/;
+    var pen = /([A-Z]){5}([0-9]){4}([A-Z]){1}$/;
     Tab(firstTab);
     function Tab(n) {
       var t = document.getElementsByClassName("tab");
@@ -196,26 +204,60 @@
           valid = false;
         }
       }
-      if (firstTab == 5) {
-        if (y[y.length - 2].value != y[y.length - 1].value) {
-          y[y.length - 2].className += "invalid";
-          y[y.length - 1].className += "invalid";
-          valid = false
+      if (firstTab == 2) {
+        if (y[2].value.match(phon)) {
+        }
+        else {
+          alert("You have entered an invalid phone number");
+          y[2].className += "invalid";
+          valid = false;
         }
       }
-      if (valid) {
-        document.getElementsByClassName("step")[firstTab].className += " finish";
-      }
-      return valid;
-    }
 
-    function StepIndicator(n) {
-      var i, x = document.getElementsByClassName("step");
-      for (i = 0; i < x.length; i++) {
-        x[i].className = x[i].className.replace(" active", "");
+      if (firstTab == 3) {
+        if (y[0].value.match(mail)) {
+        }
+        else {
+          alert("You have entered an invalid email address!");
+          y[0].className += "invalid";
+          valid = false;
+        }
+        if (y[1].value.match(adhar)) {
+        }
+        else {
+          alert("You have entered an invalid aadhar number!");
+          y[1].className += "invalid";
+          valid = false;
+        }
+        if (y[2].value.match(pen)) {
+        }
+        else {
+          alert("You have entered an invalid PAN number!");
+          y[2].className += "invalid";
+          valid = false;
+        }
       }
-      x[n].className += " active";
-    }
+
+        if (firstTab == 5) {
+          if (y[y.length - 2].value != y[y.length - 1].value) {
+            y[y.length - 2].className += "invalid";
+            y[y.length - 1].className += "invalid";
+            valid = false;
+          }
+        }
+        if (valid) {
+          document.getElementsByClassName("step")[firstTab].className += " finish";
+        }
+        return valid;
+      }
+
+      function StepIndicator(n) {
+        var i, x = document.getElementsByClassName("step");
+        for (i = 0; i < x.length; i++) {
+          x[i].className = x[i].className.replace(" active", "");
+        }
+        x[n].className += " active";
+      }
   </script>
   {%endblock%}
 </body>

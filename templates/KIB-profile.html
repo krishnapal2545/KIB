@@ -73,6 +73,7 @@
     }
   </style>
 </head>
+
 <body>
   {% block content %}
   {% for message in messages %}
@@ -108,7 +109,7 @@
           <b>Total Loan Balance : </b><input id='in' type="text" value="${{Customer.total_balance}}" name="name"
             readonly><br>
           <b>Account Open Date : </b><input id='in' type="text" value="{{Customer.open_time}}" name="name" readonly><br>
-          <div style="margin:1px 3px ;">
+          <div style="margin:1px 25px ;">
             <div class="flip-card" style="border-radius: 10px;">
               <div class="flip-card-inner" style="border-radius: 10px;">
                 <div class="flip-card-front" style="border-radius: 10px; padding:1px;">
@@ -124,7 +125,8 @@
                 <div class="flip-card-back" style="border-radius: 10px;">
                   <h3 style="padding: 0%;">Virtual Debit Card</h3>
                   <img src="{% static 'images/debitback.png'%}" style="width: 100%;height:35px"><br>
-                  <img src="{% static 'images/cvvimg.png'%}" style="width: 85%;height:50px;padding: 8px 5px ;">{{Customer.cvv_no}}<br>
+                  <img src="{% static 'images/cvvimg.png'%}"
+                    style="width: 85%;height:50px;padding: 8px 5px ;">{{Customer.cvv_no}}<br>
                   <p style="font-weight: 500; margin-top:20px">www.onlinekib.herokuapp.com</p>
                 </div>
               </div>
@@ -135,17 +137,20 @@
           <b>Fullname : </b><input id='in' type="text" value="{{User.name}}" name="name" readonly><br>
           <b>Gender: </b><input id='in' type="text" value="{{User.gender}}" name="name" readonly><br>
           <b>Nominee: </b><input id='in' type="text" value="{{User.nominee}}" name="name" readonly><br>
-          <b>{%if Log.verified == 1 %} &#9989; {% endif %} Phone No.: </b><input id='in' type="text" value="{{User.phone}}" name="name" readonly><br>
-          <b>{%if Log.verified == 1 %} &#9989; {% endif %}Email: </b><input id='in' type="text" value="{{Log.email}}" name="name" readonly><br>
+          <b>{%if Log.verified == 1 %} &#9989; {% endif %} Phone No.: </b><input id='in' type="text"
+            value="{{User.phone}}" name="name" readonly><br>
+          <b>{%if Log.verified == 1 %} &#9989; {% endif %}Email: </b><input id='in' type="text" value="{{Log.email}}"
+            name="name" readonly><br>
         </div>
         <div class="tab" id="document">
           <b>Aadhar Number : </b><input id='in' type="text" value="{{User.aadhar}}" name="name" readonly><br>
           <b>PAN Number: </b><input id='in' type="text" value="{{User.pan}}" name="name" readonly><br>
-          <b>Aadhar Card: </b><br><img src="/media/{{User.aadhar_img}}" style="border-radius: 8px; max-width:100%; max-height:500px;"><br>
-          <b>PAN Card: </b><br><img src="/media/{{User.pan_img}}" style="border-radius: 8px;max-width:100%; max-height:300px;"><br>
+          <b>Aadhar Card: </b><br><img src="/media/{{User.aadhar_img}}"
+            style="border-radius: 8px; max-width:100%; max-height:500px;"><br>
+          <b>PAN Card: </b><br><img src="/media/{{User.pan_img}}"
+            style="border-radius: 8px;max-width:100%; max-height:300px;"><br>
         </div>
-        
-        <a href="/login/profile/Edit/" class="btn btn-primary" style="margin-left: 100px;">Edit Profile</a><br><br>
+        <a href="/login/profile/Edit/" class="btn btn-primary" style="margin: 20px 20px;">Edit Profile</a><br><br>
       </div>
     </div>
   </div>

@@ -1,16 +1,9 @@
-
-from twilio.rest import Client
-account_sid = "AC08ac8ff7e39df59fb1a45abea2bd3434"
-auth_token  = "8a147e0d56b012a539e484bff327290d"
-client = Client(account_sid, auth_token)
+from sms import send_sms
 
 def sms(otp,phone):
-   message = client.messages \
-       .create(
-       body=f"Your KIB ONE TIMA PASSWORD IS : {otp}",
-       to=f"+91{phone}",
-       from_="+18588341439",)
-   print(message)
-
-
-
+   send_sms(
+       f'Your Onle Time Password is : {otp}',
+        '+18588341439',
+        [f'{phone}'],
+        fail_silently=True
+    )

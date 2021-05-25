@@ -25,7 +25,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = ')jb_nox@^g4=-6u4$#=#d!0+x4#3yxgh7azy313fl#++$@4(@m'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['127.0.0.1','onlinekib.herokuapp.com']
 
@@ -148,4 +148,6 @@ EMAIL_PORT = 587
 EMAIL_HOST_USER = 'krishnakumar.pal@somaiya.edu'
 EMAIL_HOST_PASSWORD = 'EEIW0K3D'
 
-SENDSMS_BACKEND = 'myapp.mysmsbackend.SmsBackend'
+SMS_BACKEND = 'sms.backends.twilio.SmsBackend'
+TWILIO_ACCOUNT_SID = 'AC08ac8ff7e39df59fb1a45abea2bd3434'
+TWILIO_AUTH_TOKEN = 'a6bb3c8dc12f20472a33f2baca03e6a4'
