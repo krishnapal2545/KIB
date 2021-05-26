@@ -23,7 +23,13 @@ def login(request):
             if LoginInfo.objects.filter(Account_No=account_no, login_id=login_id).exists():
                 if LoginInfo.objects.filter(Account_No=account_no, login_id=login_id, password=password).exists():
                     user = LoginInfo.objects.get(Account_No=account_no)
-                    user_id = user.User_ID
+                    while True :
+                       user_id=random.randint(11111111111111,99999999999999)
+                       if LoginInfo.objects.filter(User_ID=user_id).exists() :
+                          continue
+                       else :
+                           break
+                    user.User_ID = user_id
                     user.is_login = 1
                     email = user.email
                     time = datetime.today()
@@ -90,6 +96,7 @@ def logout(request, user_id):
         if user.is_login == 1:
             user.logout_time = datetime.today()
             user.is_login = 0
+            user.User_ID = 0
             user.save()
             return render(request, 'KIB-logout.html')
         else:
@@ -166,16 +173,15 @@ def edit(request, user_id):
         return redirect("/login/")
 
 
-emailotp = ''.join(random.choices(string.digits, k=6))
-phoneotp = ''.join(random.choices(string.digits, k=6))
-mailotp = 000000
-mobotp = 000000
-
-
 def verify(request,user_id):
     if LoginInfo.objects.filter(User_ID=user_id).exists():
         user = LoginInfo.objects.get(User_ID=user_id)
+        account_no = user.Account_No
         if user.is_login == 1:
+           emailotp = ''.join(random.choices(string.digits, k=6))
+           phoneotp = ''.join(random.choices(string.digits, k=6))
+           mailotp = '000000'
+           mobotp = '000000'
            user = CustomerInfo.objects.get(account_no=account_no)
            phone = user.phone
            user = LoginInfo.objects.get(Account_No=account_no)

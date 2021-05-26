@@ -76,6 +76,16 @@
 
 <body>
   {% block content %}
+  {% if Log.verified == 0 %}
+  <div class="container-fluid p-0">
+    <div class="alert alert-warning" role="alert" style="text-align: center; padding:10px;">
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+      Your Account is not Verified Do Verified for any transtion.
+    </div>
+  </div>
+  {% endif %}
   {% for message in messages %}
   <div class="container-fluid p-0">
     <div class="alert {{ message.tags }} alert-dismissible" role="alert" style="text-align: center; padding:10px;">
@@ -86,7 +96,7 @@
     </div>
   </div>
   {% endfor %}
-  <div class="card mb-3" style="max-width: 100%;">
+  <div class="card mb-3" style="max-width: 100%; margin-top:0px;">
     <div class="row g-0">
       <div class="col-md-4">
         <img src="/media/{{User.profile_img}}" style="width: 50%; border-radius:10%;">
