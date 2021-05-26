@@ -15,6 +15,7 @@ from pathlib import Path
 from django.contrib.messages import constants as messages
 
 
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -29,7 +30,7 @@ SECRET_KEY = ')jb_nox@^g4=-6u4$#=#d!0+x4#3yxgh7azy313fl#++$@4(@m'
 # SECURITY WARNING: don't run with debug turned on in production!
 SECURE_SSL_REDIRECT = False
 SESSION_COOKIE_SECURE = False
-CSRF_COOKIE_SECURE = False
+CSRF_COOKIE_SECURE = True
 SECURE_HSTS_INCLUDE_SUBDOMAINS=False
 SECURE_HSTS_PRELOAD = False
 DEBUG = False
