@@ -16,6 +16,12 @@ def newaccount(request):
              continue
          else :
              break
+        while True :
+         user_id=random.randint(11111111111111,99999999999999)
+         if LoginInfo.objects.filter(User_ID=user_id).exists() :
+             continue
+         else :
+             break
         debit_no = ''.join(random.choices(string.digits,k=12))
         cvv_no = ''.join(random.choices(string.digits,k=3))
         total_deposite = 0.00
@@ -40,7 +46,7 @@ def newaccount(request):
             Result="Your Have Already Register In The KIB-Bank Check Your Account Number in Your Mail Box and Login "
             messages.error(request,Result)
             return render(request,'KIB-newaccount.html')
-        user = LoginInfo.objects.create(Account_No=account_no,login_id=login_id,password=password2,email=email)
+        user = LoginInfo.objects.create(Account_No=account_no,login_id=login_id,password=password2,email=email,User_ID = user_id,is_login=0)
         user.save();
         subject = 'welcome to KIB'
         message = f'''Hello {name}, thank you for registering in Krishna International Bank.

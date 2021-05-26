@@ -42,7 +42,7 @@
     <div class="collapse navbar-collapse" id="navbarNavDropdown" style="position: static;">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="/login/profile/">
+          <a class="nav-link active" aria-current="page" href="/login/profile/{{Log.User_ID}}/">
             {% if Log.verified == 1 %}
             <b style="font-size: 20px; color:black;"><i class="fa fa-user"style="color:lawngreen;"></i>Profile</b>
             {% else %}
@@ -52,7 +52,7 @@
         </li>
         {% if Log.verified == 0 %}
         <li class="nav-item">
-          <a class="nav-link " href="/login/profile/verification/"><b style="font-size: 20px; color:black;">Verify Account</b></a>
+          <a class="nav-link " href="/login/profile/verify/{{Log.User_ID}}/"><b style="font-size: 20px; color:black;">Verify Account</b></a>
         </li>
         {% endif %}
         {% if Log.verified == 1 %}
@@ -89,7 +89,7 @@
         </div>
         
         <li class="nav-item">
-          <a class="nav-link " href="logout/"><b style="font-size: 20px; color:black;"><i class="fa fa-power-off" style="color: red; font-size:20px;" ></i>Log Out</b></a>
+          <a class="nav-link " href="/login/profile/logout/{{Log.User_ID}}/"><b style="font-size: 20px; color:black;"><i class="fa fa-power-off" style="color: red; font-size:20px;" ></i>Log Out</b></a>
         </li>
       </ul>
       <form class="d-flex">
