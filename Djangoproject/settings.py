@@ -14,6 +14,7 @@ import os
 from pathlib import Path
 from django.contrib.messages import constants as messages
 
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -22,9 +23,16 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
+
 SECRET_KEY = ')jb_nox@^g4=-6u4$#=#d!0+x4#3yxgh7azy313fl#++$@4(@m'
 
 # SECURITY WARNING: don't run with debug turned on in production!
+SECURE_HSTS_SECONDS = 60
+SECURE_SSL_REDIRECT = True
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
+SECURE_HSTS_INCLUDE_SUBDOMAINS=True
+SECURE_HSTS_PRELOAD = True
 DEBUG = False
 
 ALLOWED_HOSTS = ['127.0.0.1','onlinekib.herokuapp.com']
@@ -49,6 +57,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'NewAccount.apps.NewaccountConfig',
     'Customer.apps.CustomerConfig',
+    'Home.apps.HomeConfig',
 ]
 
 MIDDLEWARE = [
@@ -141,13 +150,10 @@ STATIC_ROOT = os.path.join(BASE_DIR,'assest')
 MEDIA_URL='/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR,'media/')
 
+
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
-EMAIL_HOST_USER = 'krishnakumar.pal@somaiya.edu'
-EMAIL_HOST_PASSWORD = 'EEIW0K3D'
-
-SMS_BACKEND = 'sms.backends.twilio.SmsBackend'
-TWILIO_ACCOUNT_SID = 'AC50fe7fe2f38b4bb4248aba1c1b2d09ed'
-TWILIO_AUTH_TOKEN = '8307ec010072f670699eb32ae767f0f4'
+EMAIL_HOST_USER = 'www.onlinekib@gmail.com'
+EMAIL_HOST_PASSWORD = '(!@#$%&)'

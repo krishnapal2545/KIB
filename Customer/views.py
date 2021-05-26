@@ -15,8 +15,9 @@ account_no = 0
 
 
 def login(request):
-    global account_no
+    
     if request.method == 'POST':
+        global account_no
         account_no = request.POST['account_no']
         login_id = request.POST['login_id']
         password = request.POST['password']
