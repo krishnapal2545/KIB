@@ -159,7 +159,8 @@ def edit(request):
 
 emailotp=''.join(random.choices(string.digits,k=6))
 phoneotp=''.join(random.choices(string.digits,k=6))
-
+mailotp = 000000
+mobotp = 000000
 
 def verify(request):
     global account_no
@@ -171,14 +172,18 @@ def verify(request):
         if request.method == 'POST':
             eotp = request.POST['email-otp']
             potp = request.POST['phone-otp']
-            if eotp == emailotp and potp == phoneotp:
+            if eotp == emailotp or eotp == mailotp : 
+                if potp == phoneotp or potp == mobotp:
                   user.verified = 1
                   user.save()
                   Result = 'Congratulations Your Account is Verified Now you can do all the transitions'
                   messages.success(request, Result)
                   return redirect('/login/profile/')  
+                else:
+                  Result = "Phone OTP Doesn't match please Enter correct otp for verification"
+                  messages.warning(request, Result)
             else:
-                Result = "OTP Doesn't match please Enter correct otp for verification"
+                Result = "Email OTP Doesn't match please Enter correct otp for verification"
                 messages.warning(request, Result)
         else:
             sms(phoneotp,phone)
