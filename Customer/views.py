@@ -1,7 +1,5 @@
 from datetime import datetime
-from django.http import response
-from django.http.request import validate_host
-from . sms import sms
+from logging import error
 from django.contrib import messages
 from django.shortcuts import redirect, render
 from NewAccount.models import CustomerInfo
@@ -10,9 +8,8 @@ from django.conf import settings
 from django.core.mail import send_mail
 import random
 import string
-
-account_no = 0
-
+from twilio.rest import Client
+from Home.models import AdminInfo
 
 def login(request):
     if request.method == 'POST':
@@ -199,19 +196,37 @@ def verify(request,user_id):
                   else:
                       Result = "Phone OTP Doesn't match please Enter correct otp for verification"
                       messages.warning(request, Result)
+                      return render(request, 'KIB-verify.html')
               else:
                   Result = "Email OTP Doesn't match please Enter correct otp for verification"
                   messages.warning(request, Result)
+                  return render(request, 'KIB-verify.html')
            else:
-               sms(phoneotp, phone)
-               subject = 'KIB Email Verification'
-               message = f''' Your ONE TIME PASSWORD (OTP) is {emailotp}'''
-               email_from = settings.EMAIL_HOST_USER
-               recipient_list = [email, ]
-               send_mail(subject, message, email_from, recipient_list)
-               Result = "Check Your Mail Box and Phone Message Box For OTP"
-               messages.info(request, Result)
-           return render(request, 'KIB-verify.html')
+               admin = AdminInfo.objects.get(id=1)
+               TWILIO_ACCOUNT_SID = admin.account_sid
+               TWILIO_AUTH_TOKEN = admin.account_token
+               message = f'Your One Time Password is {phoneotp}'
+               client = Client(TWILIO_ACCOUNT_SID,TWILIO_AUTH_TOKEN)
+               try:
+                  client.messages.create(
+                  to=f'{phone}',
+                  from_=f'{admin.phonenumber}',
+                  body=message
+                  )
+                  subject = 'KIB Email Verification'
+                  message = f''' Your ONE TIME PASSWORD (OTP) is {emailotp}'''
+                  email_from = settings.EMAIL_HOST_USER
+                  recipient_list = [email, ]
+                  send_mail(subject, message, email_from, recipient_list)
+                  Result = "Check Your Mail Box and Phone Message Box For OTP"
+                  messages.info(request, Result)
+                  return render(request, 'KIB-verify.html')
+               except Exception as e:
+                  Result = 'Your Mobile Number is not Correct please edit it '
+                  messages.warning(request, Result)
+                  return redirect(f"/login/profile/{user_id}/")
+              
+           
         else:
            Result = 'Login First'
            messages.warning(request, Result)
