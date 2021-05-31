@@ -97,15 +97,18 @@ def profile(request, user_id):
 def logout(request, user_id):
 
     if LoginInfo.objects.filter(User_ID=user_id).exists():
-        user = LoginInfo.objects.get(User_ID=user_id)
-        if user.is_login == 1:
-            user.logout_time = datetime.today()
-            user.is_login = 0
-            user.User_ID = 0
-            user.save()
-            return render(request, 'KIB-logout.html')
+        if request.method =='POST':
+            user = LoginInfo.objects.get(User_ID=user_id)
+            if user.is_login == 1:
+                user.logout_time = datetime.today()
+                user.is_login = 0
+                user.User_ID = 0
+                user.save()
+                return render(request, 'KIB-logout.html')
+            else:
+                return redirect("/home/")
         else:
-            return redirect("/home/")
+            return render(request, 'KIB-logout.html')
     else:
         return redirect("/home/")
 

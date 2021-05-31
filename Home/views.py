@@ -1,4 +1,3 @@
-from typing import Awaitable
 from .models import *
 from Customer.models import CredentialInfo 
 from django.shortcuts import  render 

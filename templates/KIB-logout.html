@@ -51,7 +51,9 @@
 
     <center>
         <p style="margin-top: 180px;">click on logout </p>
-        <h1 onclick="Logout()">Logout</h1>
+        <form method="POST">{% csrf_token %}
+          <button type="submit" style="background-color: black; border-style:hidden;"><h1>Logout</h1></button>
+        </form>
         <div style="animation-delay: 0.1s; background-color:white; width:13px; height:13px; border-radius:100%;" id="d"></div>
         <div style="animation-delay: 0.2s; background-color:white;width:12px; height:12px; border-radius:100%;" id="d"></div>
         <div style="animation-delay: 0.3s; background-color:white;width:11px; height:11px; border-radius:100%;" id="d"></div>
@@ -68,10 +70,10 @@
         <div style="animation-delay: 1.4s; background-color:white;width:0px; height:0px; border-radius:100%;" id="d"></div>
     </center>
     <script>
-        function preventBack() { window.history.forward(); }
+        function preventBack() { 
+            window.history.forward(); }
         setTimeout("preventBack()",0);
         window.onunload = function () { null };
-        function Logout(){ window.location.href = '/home/' ;}
     </script>
 </body>
 

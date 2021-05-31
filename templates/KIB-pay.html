@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html>
+
+<head lang="en">
+    <title> onlineKIB </title>
+    <link rel="icon" href="/static/images/KIB-icon.png"
+        type="image/x-icon">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <link rel="stylesheet" href="C:\Users\Krishna\Desktop\\Krishna Pal\Project\KIB\templates\KIB-transition/main.css">
+    <link rel="stylesheet"
+        href="C:\Users\Krishna\Desktop\\Krishna Pal\Project\KIB\templates\KIB-transition/transition.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
+        integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        html, body {
+            height: 100%;
+        }
+        
+        body {
+            margin: 0;
+            padding: 0;
+            font-size: 14px;
+            font-family: "Roboto","Lucida Grande","DejaVu Sans","Bitstream Vera Sans",Verdana,Arial,sans-serif;
+            color: #333;
+            background:#fff;
+        }
+        
+        a:link, a:visited {
+            color: #447e9b;
+            text-decoration: none;
+        }
+        
+        a:focus, a:hover {
+            color: #036;
+            cursor: pointer;
+        }
+        
+        a img {
+            border: none;
+        }
+        .payform {
+            display: none;
+        }
+
+        #in {
+            width: 90%;
+            padding: 12px;
+            border-style: none;
+            border-top-style: hidden;
+            border-right-style: hidden;
+            border-left-style: hidden;
+            border-bottom-style: solid;
+            background-color: #ffffff;
+            margin-top: 25px;
+            margin-bottom: 20px;
+            margin-left: 3%;
+            resize: vertical;
+        }
+
+        :focus {
+            outline: none;
+        }
+    </style>
+</head>
+<nav class="navbar navbar-expand-lg navbar-light bg-light" style="background-color: #ffffff;">
+    <div class="container-fluid" style="background-color: #ffffff;">
+        <a onclick="View(0)"><img
+                src="/static/photos/kibpayicon.png"
+                style="width: 180px; height:50px;"></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                {% if User %}
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/login/profile/{{Log.User_ID}}/"><img
+                            src="/media/{{User.profile_img}}"
+                            style="width:45px;height:40px; margin-left:10px; border-radius:100%;"><br><span
+                            style="margin-left: 10px ;" h>Profile</span></a>
+                </li>
+                {% else %}
+                <li class="nav-item">
+                  <a class="nav-link active" aria-current="page" href="/login/" ><img
+                          src="/static/photos/loginicon.png"
+                          style="width:50px;height:40px; margin-left:30px;"><br><span
+                          style="margin-left: 10px ;">Login/Signin</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/newaccount/" ><img
+                            src="/static/photos/newaccounticon.png"
+                            style="width:60px;height:40px; margin-left:30px;"><br><span
+                            style="margin-left: 10px ;">Open Account</span></a>
+                </li>
+                {% endif %}
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/home/" ><img
+                            src="/static/photos/bankicon.png"
+                            style="width:35px;height:40px; margin-left:10px;"><br><span
+                            style="margin-left: 10px ;">Bank</span></a>
+                </li>
+               
+              
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" onclick="View(1)"><img
+                            src="/static/photos/mobicon.png"
+                            style="width:25px;height:40px; margin-left:40px;"><br><span
+                            style="margin-left: 10px ;">Pre/Postpaid</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" onclick="View(2)"><img
+                            src="/static/photos/bulbicon.png"
+                            style="width:40px;height:40px; margin-left:25px; border-color:blue;"><br><span
+                            style="margin-left: 10px ;">Electricity</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" onclick="View(3)"><img
+                            src="/static/photos/dthicon.png"
+                            style="width:45px;height:40px; margin-left:20px;"><br><span style="margin-left: 10px ;">DTH
+                            Bill</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" onclick="View(4)"><img
+                            src="/static/photos/flighticon.png"
+                            style="width:45px;height:40px; margin-left:20px;"><br><span
+                            style="margin-left: 25px ;">Flight</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" onclick="View(5)"><img
+                            src="/static/photos/metroicon.png"
+                            style="width:45px;height:40px; margin-left:25px;"><br><span
+                            style="margin-left: 10px ;">Metro/Train</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" onclick="View(6)"><img
+                            src="/static/photos/loanicon.png"
+                            style="width:45px;height:40px; margin-left:20px;"><br><span style="margin-left: 10px ;">Pay
+                            Loan</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" onclick="View(7)"><img
+                            src="/static/photos/insuranceicon.png"
+                            style="width:45px;height:40px; margin-left:20px;"><br><span
+                            style="margin-left: 10px ;">Insurance</span></a>
+                </li>
+                {% if User %}
+                <li class="nav-item">
+                  <a class="nav-link active" aria-current="page" href="/bazaar/{{Log.User_ID}}/"><img
+                    src="/static/photos/kibazaaricon.png"
+                    style="width: 165px; height:40px;"><br><span
+                    style="margin-left: 10px ;">KIB Online Shopping</span></a>
+                </li>
+                {% else %}
+                <li class="nav-item">
+                  <a class="nav-link active" aria-current="page" href="/bazaar/"><img
+                    src="/static/photos/kibazaaricon.png"
+                    style="width: 165px; height:40px;"><br><span
+                    style="margin-left: 10px ;">KIB Online Shopping</span></a>
+                </li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<body style="background-color:#f2f2f2 ;">
+    <div style="margin-top: 20px;" class="payform">
+        <div id="demo" class="carousel slide" data-ride="carousel">
+            <ul class="carousel-indicators">
+              <li data-target="#demo" data-slide-to="0" class="active"></li>
+              <li data-target="#demo" data-slide-to="1"></li>
+              <li data-target="#demo" data-slide-to="2"></li>
+            </ul>
+          
+            <div class="carousel-inner">
+              <div class="carousel-item active">
+                <img src="/static/photos/pay-S1.png" style="width: 100%; height:250px;"alt="Los Angeles">
+              </div>
+              <div class="carousel-item">
+                <img src="/static/photos/pay-S2.png" style="width: 100%;height:250px" alt="Chicago">
+              </div>
+              <div class="carousel-item">
+                <img src="/static/photos/pay-S3.png" style="width: 100%; height:250px;" alt="New York">
+              </div>
+            </div>
+          
+            <a class="carousel-control-prev" href="#demo" data-slide="prev">
+              <span class="carousel-control-prev-icon"></span>
+            </a>
+            <a class="carousel-control-next" href="#demo" data-slide="next">
+              <span class="carousel-control-next-icon"></span>
+            </a>
+          
+          </div>
+          <div id="multi-item-example" class="carousel slide carousel-multi-item" data-ride="carousel" style="margin-top:10px;">
+            <a class="carousel-control-prev" href="#multi-item-example" data-slide="prev"><i class="fas fa-arrow-alt-circle-left" style="font-size:50px;"></i>
+              </a>
+              <a class="carousel-control-next" href="#multi-item-example" data-slide="next"><i class="fas fa-arrow-alt-circle-right"style="font-size:50px;"></i>
+              </a>
+            <ol class="carousel-indicators">
+              <li data-target="#multi-item-example" data-slide-to="0" class="active"></li>
+              <li data-target="#multi-item-example" data-slide-to="1"></li>
+              
+            </ol>
+            <div class="carousel-inner" role="listbox" style="margin: auto;">
+              <div class="carousel-item active" style="margin: auto; ">      
+                <div class="col-md-3" style="float:left; margin: 3px 5px; width:320px;">
+                  <div class="card mb-2">
+                    <img class="card-img-top"
+                      src="https://assetscdn1.paytm.com/images/catalog/view_item/693992/1607954915794.png" alt="image" style="max-height: 350px;">
+                    <div class="card-body">
+                      <h4 class="card-title">Apply for IOP</h4>
+                      <a class="btn btn-primary">Apply</a>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-3" style="float:left; margin: 3px 5px; width:320px;">
+                    <div class="card mb-2">
+                      <img class="card-img-top"
+                        src="https://assetscdn1.paytm.com/images/catalog/view_item/495336/1604664590813.png" alt="image" style="max-height: 350px;">
+                      <div class="card-body">
+                        <h4 class="card-title">Invest in Stock</h4>
+                        <a class="btn btn-primary">Apply</a>
+                      </div>
+                    </div>
+                  </div>
+          
+                <div class="col-md-3" style="float:left;margin: 3px 5px; width:320px;">
+                  <div class="card mb-2">
+                    <img class="card-img-top"
+                      src="https://assetscdn1.paytm.com/images/catalog/view_item/495337/1604664726458.png" alt="image" style="max-height: 350px;">
+                    <div class="card-body">
+                        <h4 class="card-title">Invest in ETFs</h4>
+                        <a class="btn btn-primary">Apply</a>
+                    </div>
+                  </div>
+                </div>
+                
+                 <div class="col-md-3" style="float:left; margin: 3px 5px; width:340px;">
+                 <div class="card mb-2">
+                    <img class="card-img-top"
+                      src="https://assetscdn1.paytm.com/images/catalog/view_item/676990/1604917838029.png" alt="image" style="max-height: 350px;">
+                    <div class="card-body">
+                        <h4 class="card-title">Invest in Mutual Funds</h4>
+                        <a class="btn btn-primary">Apply</a>
+                    </div>
+                  </div>
+                </div>
+          
+              </div>
+              <div class="carousel-item">
+          
+                <div class="col-md-3" style="float:left;margin: 3px 5px; width:320px;">
+                  <div class="card mb-2">
+                    <img class="card-img-top"
+                      src="https://assetscdn1.paytm.com/images/catalog/view_item/495341/1595418581202.png" alt="image" style="max-height: 350px;">
+                    <div class="card-body">
+                        <h4 class="card-title">Invest in Equit Funds</h4>
+                        <a class="btn btn-primary">Apply</a>
+                    </div>
+                  </div>
+                </div>
+          
+                <div class="col-md-3" style="float:left;margin: 3px 5px; width:315px;">
+                  <div class="card mb-2">
+                    <img class="card-img-top"
+                      src="https://assetscdn1.paytm.com/images/catalog/view_item/549153/1595418625907.png" alt="image" style="max-height: 350px;">
+                    <div class="card-body">
+                        <h4 class="card-title">Invest in NPS</h4>
+                        <a class="btn btn-primary">Apply</a>
+                    </div>
+                  </div>
+                </div>
+          
+                <div class="col-md-3" style="float:left;margin: 3px 5px; width:330px;">
+                  <div class="card mb-2">
+                    <img class="card-img-top"
+                      src="https://assetscdn1.paytm.com/images/catalog/view_item/495345/1595418776601.png" alt="image" style="max-height: 350px;">
+                    <div class="card-body">
+                        <h4 class="card-title">Explore Funds Managers</h4>
+                        <a class="btn btn-primary">Click</a>
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="col-md-3" style="float:left;margin: 3px 5px; width:340px;">
+                  <div class="card mb-2">
+                    <img class="card-img-top"
+                      src="https://assetscdn1.paytm.com/images/catalog/view_item/495340/1595418699007.png" alt="image" style="max-height: 350px;">
+                    <div class="card-body">
+                        <h4 class="card-title">Invest in Balanced Funds</h4>
+                        <a class="btn btn-primary">Apply</a>
+                    </div>
+                  </div>
+                </div>
+          
+              </div>
+            </div>       
+          </div>
+    </div>
+    <div style="margin-top: 20px;" class="payform">
+        <div class="card mb-3"
+            style="max-width: 400px; margin: auto; border-radius:10px; padding: 10px; background-color: #ffffff; ">
+            <div class="row g-0">
+                <form method="POST">
+                    <h4 style="font-family: 'Times New Roman', Times, serif; margin-top: 10px; margin-left:10px; ">
+                        Mobile
+                        Recharge and Bill Payment </h4>
+
+                    <input id='in' type="text" placeholder="Mobile Number" name="mobile_no" required><br>
+                    <select id='in' name="operator" class="custom-select">
+                        <option value="jio" >JIO</option>
+                        <option value="vi">VODAFOAN & IDEA</option>
+                        <option value="airtel">AIRTEL</option>
+                        <option value="bsnl">BSNL</option>
+                    </select>
+
+                    <input id='in' type="text" placeholder="Amount" name="amount" required><br>
+                    <div style="margin: auto; width:60% ; text-align:center">
+                        <button type="submit" class="btn btn-primary" style="border-radius: 5px; width:100%;">
+                            <b> Recharge Now</b></button><br>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div style="margin-top: 20px;" class="payform">
+        <div class="card mb-3"
+            style="max-width: 400px; margin: auto; border-radius:10px; padding: 10px; background-color: #ffffff; ">
+            <div class="row g-0">
+                <form method="POST">
+                    <h4 style="font-family: 'Times New Roman', Times, serif; margin-top: 10px; margin-left:10px; ">
+                        Electricity Bill Payment </h4>
+
+                    <input id='in' type="text" placeholder="Enter Your State" name="state" required><br>
+
+                    <input id='in' type="text" placeholder="Enter your Board" name="board" required><br>
+
+                    <input id='in' type="text" placeholder="Enter your Consumer Number" name="cousumer" required><br>
+                    <input id='in' type="text" placeholder="Enter Amount " name="amount" required><br>
+                    <div style="margin: auto; width:60% ; text-align:center">
+                        <button type="submit" class="btn btn-primary" style="border-radius: 5px; width:100%;">
+                            <b> Recharge Now</b></button><br>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div style="margin-top: 20px;" class="payform">
+        <div class="card mb-3"
+            style="max-width: 400px; margin: auto; border-radius:10px; padding: 10px; background-color: #ffffff; ">
+            <div class="row g-0">
+                <form method="POST">
+                    <h4 style="font-family: 'Times New Roman', Times, serif; margin-top: 10px; margin-left:10px; ">
+                        DTH Recharge </h4>
+
+                    <input id='in' type="text" placeholder="Enter Your Operator" name="operator" required><br>
+
+                    <input id='in' type="text" placeholder="Enter Customer ID" name="custoer_id" required><br>
+
+                    <input id='in' type="text" placeholder="Enter Amount " name="amount" required><br>
+                    <div style="margin: auto; width:60% ; text-align:center">
+                        <button type="submit" class="btn btn-primary" style="border-radius: 5px; width:100%;">
+                            <b> Proceed to Recharge</b></button><br>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div style="margin-top: 20px;" class="payform">
+        <div class="card mb-3"
+            style="max-width: 500px; margin: auto; border-radius:10px; padding: 10px; background-color: #ffffff; ">
+            <div class="row g-0">
+                <form method="POST">
+                    <h4 style="font-family: 'Times New Roman', Times, serif; margin-top: 10px; margin-left:10px; ">
+                        Book Flight Tickets </h4>
+
+                    <input id='in' type="text" placeholder="From " name="from" required><br>
+
+                    <input id='in' type="text" placeholder="TO" name="to" required><br>
+                    <input id='in' type="text" placeholder="Depature Date " name="ddate" required><br>
+                    <input id='in' type="text" placeholder="Return Date " name="rdate"><br>
+                    <input id='in' type="text" placeholder="Travellers " name="travellers" required><br>
+                    <div style="margin: auto; width:60% ; text-align:center">
+                        <button type="submit" class="btn btn-primary" style="border-radius: 5px; width:100%;">
+                            <b> Search Tickets</b></button><br>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div style="margin-top: 20px;" class="payform">
+        <div class="row">
+            <div class="card mb-3"
+                style="max-width: 400px; margin: auto; border-radius:10px; padding: 10px; background-color: #ffffff; ">
+                <div class="row g-0">
+                    <form method="POST">
+                        <h4 style="font-family: 'Times New Roman', Times, serif; margin-top: 10px; margin-left:10px; ">
+                            Book Train Tickets </h4>
+
+                        <input id='in' type="text" placeholder="From " name="from" required><br>
+                        <input id='in' type="text" placeholder="TO" name="to" required><br>
+                        <input id='in' type="text" placeholder="Depature Date " name="ddate" required><br>
+                        <input id='in' type="text" placeholder="Travellers " name="travellers" required><br>
+                        <div style="margin: auto; width:60% ; text-align:center">
+                            <button type="submit" class="btn btn-primary" style="border-radius: 5px; width:100%;">
+                                <b> Search Tickets</b></button><br>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="card mb-3"
+                style="max-width: 400px; margin: auto; border-radius:10px; padding: 10px; background-color: #ffffff; ">
+                <div class="row g-0">
+                    <form method="POST">
+                        <h4 style="font-family: 'Times New Roman', Times, serif; margin-top: 10px; margin-left:10px; ">
+                            Metro </h4>
+
+                        <input id='in' type="text" placeholder="Metro .e.g. Mumbai Metro " name="metro" required><br>
+                        <input id='in' type="text" placeholder="Ticket Type" name="ticket type" required><br>
+                        <input id='in' type="text" placeholder="Card Number " name="card_no" required><br>
+                        <input id='in' type="text" placeholder="Amount " name="amount" required><br>
+                        <div style="margin: auto; width:60% ; text-align:center">
+                            <button type="submit" class="btn btn-primary" style="border-radius: 5px; width:100%;">
+                                <b> Proceed</b></button><br>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div style="margin-top: 20px;" class="payform">
+        <div class="card mb-3"
+            style="max-width: 500px; margin: auto; border-radius:10px; padding: 10px; background-color: #ffffff; ">
+            <div class="row g-0">
+                <form method="POST">
+                    <h4 style="font-family: 'Times New Roman', Times, serif; margin-top: 10px; margin-left:10px; ">
+                        Pay Your Loan EMI </h4>
+
+                    <input id='in' type="text" placeholder="Enter Your Lender" name="lender" required><br>
+
+                    <input id='in' type="text" placeholder="Loan Payment Mode" name="lpaymod" required><br>
+                    <input id='in' type="text" placeholder="Registered Mobile Number with Bank " name="mobbank"
+                        required><br>
+                    <input id='in' type="text" placeholder="Customer Name " name="cname"><br>
+                    <input id='in' type="text" placeholder="Amount " name="amount" required><br>
+                    <select id='in' name="paymod" class="custom-select">
+                        <option value="netbank" selected>Net Banking</option>
+                        <option value="upi">UPI</option>
+                      </select>
+                    <div style="margin: auto; width:60% ; text-align:center">
+                        <button type="submit" class="btn btn-primary" style="border-radius: 5px; width:100%;">
+                            <b> Proceed</b></button><br>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div style="margin-top: 20px;" class="payform">
+        <div class="card mb-3"
+            style="max-width: 500px; margin: auto; border-radius:10px; padding: 10px; background-color: #ffffff; ">
+            <div class="row g-0">
+                <form method="POST">
+                    <h4 style="font-family: 'Times New Roman', Times, serif; margin-top: 10px; margin-left:10px; ">
+                        Pay your Insurance Premium </h4>
+
+                    <select id='in' name="insuretype" class="custom-select">
+                        <option value="phaltu" selected>Phaltu ka Life Insurance</option>
+                        <option value="mast">Mast Life Insurance</option>
+                        <option value="mast">Extra Life Insurance</option>
+                    </select>
+                    <input id='in' type="text" placeholder="Enter Your Lender" name="lender" required><br>
+
+                    <input id='in' type="text" placeholder="Loan Payment Mode" name="lpaymod" required><br>
+                    <input id='in' type="text" placeholder="Registered Mobile Number with Bank " name="mobbank"
+                        required><br>
+                    <input id='in' type="text" placeholder="Customer Name " name="cname"><br>
+                    <input id='in' type="text" placeholder="Amount " name="amount" required><br>
+                    
+                    <div style="margin: auto; width:60% ; text-align:center">
+                        <button type="submit" class="btn btn-primary" style="border-radius: 5px; width:100%;">
+                            <b> Proceed</b></button><br>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+  <footer class="page-footer font-small blue pt-4" style="background-color: lightblue;">
+    <div class="container-fluid text-center text-md-left">
+      <div class="row">
+        <div class="col-md-6 mt-md-0 mt-3" >
+          <h5 class="text-uppercase"><img src="/static/photos/kibicon.png" style="width: 60%;"></h5>
+          <h5>Krishna Internation Bank Online Payment</h5>
+        </div>
+        <div class="col-md-3 mb-md-0 mb-3">
+          <h5 class="text-uppercase">Customer services </h5>
+          <ul class="list-unstyled">
+            <li>
+              <a href="#!">91 8654378976</a>
+            </li>
+            <li>
+              <a href="#!">Fax : 2409876</a>
+            </li>
+            <li>
+              <a href="#!">Krishna Internation Bank</a>
+            </li>
+            <li>
+              <a href="#!">Main Office : Mumbai</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer-copyright text-center py-3">
+      <a href="#" class="fa fa-linkedin"></a>
+      <a href="" class="fa fa-instagram"></a>
+      <a href="" class="fa fa-facebook"></a>
+      <a href="" class="fa fa-github"></a><br>
+      © 2020 Copyright:
+      <a href="#">All right reserved</a>
+    </div>
+  </footer>
+    <script>
+        var first = 0;
+        View(first);
+        function View(n) {
+            var x = document.getElementsByClassName("payform");
+            for (i = 0; i < x.length; i++) {
+                x[i].style.display = "none";
+            }
+            x[n].style.display = "block";
+        }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

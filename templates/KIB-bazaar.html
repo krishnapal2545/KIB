@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html>
+
+<head lang="en">
+  <title> onlineKIB </title>
+  <link rel="icon" href="/static/images/KIB-icon.png" type="image/x-icon">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+  <link rel="stylesheet" href="C:\Users\Krishna\Desktop\\Krishna Pal\Project\KIB\templates\KIB-transition/main.css">
+  <link rel="stylesheet"
+    href="C:\Users\Krishna\Desktop\\Krishna Pal\Project\KIB\templates\KIB-transition/transition.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
+    integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    html,
+    body {
+      height: 100%;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-size: 14px;
+      font-family: "Roboto", "Lucida Grande", "DejaVu Sans", "Bitstream Vera Sans", Verdana, Arial, sans-serif;
+      color: #333;
+      background: #fff;
+    }
+
+    a:link,
+    a:visited {
+      color: #447e9b;
+      text-decoration: none;
+    }
+
+    a:focus,
+    a:hover {
+      color: #036;
+      cursor: pointer;
+    }
+
+    a img {
+      border: none;
+    }
+
+    .payform {
+      display: none;
+    }
+
+    #in {
+      width: 90%;
+      padding: 12px;
+      border-style: none;
+      border-top-style: hidden;
+      border-right-style: hidden;
+      border-left-style: hidden;
+      border-bottom-style: solid;
+      background-color: #ffffff;
+      margin-top: 25px;
+      margin-bottom: 20px;
+      margin-left: 3%;
+      resize: vertical;
+    }
+
+    :focus {
+      outline: none;
+    }
+  </style>
+</head>
+<nav class="navbar navbar-expand-lg navbar-light bg-light" style="background-color: #ffffff;">
+  <div class="container-fluid" style="background-color: #ffffff;">
+    <a onclick="View(0)"><img src="/static/photos/kibazaaricon.png" style="width: 185px; height:50px;"></a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        {% if User %}
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="/login/profile/{{Log.User_ID}}/"><img
+              src="/media/{{User.profile_img}}"
+              style="width:45px;height:40px; margin-left:10px; border-radius:100%;"><br><span
+              style="margin-left: 10px ;">Profile</span></a>
+        </li>
+        {% else %}
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="/login/"><img src="/static/photos/loginicon.png"
+              style="width:50px;height:40px; margin-left:30px;"><br><span
+              style="margin-left: 10px ;">Login/Signin</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="/newaccount/"><img
+              src="/static/photos/newaccounticon.png" style="width:60px;height:40px; margin-left:30px;"><br><span
+              style="margin-left: 10px ;">Open Account</span></a>
+        </li>
+        {% endif %}
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="/home/"><img src="/static/photos/bankicon.png"
+              style="width:35px;height:40px; margin-left:30px;"><br><span style="margin-left: 30px ;">Bank</span></a>
+        </li>
+        {% if User %}
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="/bazaar/cart/{{Log.User_ID}}/"><img
+              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRWc56P5pW9BdCRU-_YRrYPn9IBiNye0fxuSA&usqp=CAU"
+              style="width: 80px; height:40px; margin-left:40px;"><br><span style="margin-left: 30px ;">Shopping
+              Cart</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link " href="/login/profile/logout/{{Log.User_ID}}/"><i class="fa fa-power-off"
+              style="color: red; font-size:40px; margin-left:15px;"></i><br><span style="margin-left: 10px ;">LOGOUT</span></a>
+        </li>
+        {% endif %}
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="/transition/"><img src="/static/photos/kibpayicon.png"
+              style="width: 160px; height:40px; margin-left:20px;"><br><span style="margin-left: 30px ;">KIB Online
+              Payment</span></a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<nav class="navbar navbar-expand-lg navbar-light bg-light" style="background-color: rgb(1,1,196)">
+  <div class="container-fluid" style="background-color: rgb(1,1,196);">
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav" style="background-color: rgb(1, 1, 196);">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" onclick="View(0)"><img
+              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRyhZ3hiwun39UaX3VQiH3W8ZvI4DgaytcgSQ&usqp=CAU"
+              style="width:70px;height:60px; border-radius:100%; margin-left:50px;"><br><span
+              style="margin-left: 60px ;">Home</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" onclick="View(1)"><img
+              src="https://rukminim1.flixcart.com/www/200/200/promos/30/04/2021/521352b2-9c3e-4d2e-bf79-71165ed41a3b.png?q=90"
+              style="width:100px;height:60px; border-radius:100%; margin-left:50px;"><br><span
+              style="margin-left: 70px ;">Mobiles</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" onclick="View(2)"><img
+              src="https://rukminim1.flixcart.com/www/200/200/promos/30/04/2021/55e3d7c3-9564-4ec6-8024-02c6b2fe65ed.png?q=90"
+              style="width:100px;height:60px; border-radius:100%;margin-left:50px;"><br><span
+              style="margin-left: 60px ;">Electronics
+            </span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" onclick="View(3)"><img
+              src="https://rukminim1.flixcart.com/www/200/200/promos/30/04/2021/880e0970-97a8-4159-9c4f-e22e4d1a76ab.png?q=90"
+              style="width:100px;height:60px; border-radius:100%;margin-left:50px;"><br><span
+              style="margin-left: 70px ;">Fashion
+            </span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" onclick="View(4)"><img
+              src="https://rukminim1.flixcart.com/www/200/200/promos/30/04/2021/c2be6deb-e44c-4ced-8eae-b04bf56b30c7.png?q=90"
+              style="width:100px;height:60px; border-radius:100%;margin-left:50px;"><br><span
+              style="margin-left: 45px ;">Home
+              Appliances</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" onclick="View(5)"><img
+              src="https://rukminim1.flixcart.com/www/200/200/promos/30/04/2021/f788de21-4913-4130-a684-baaa7d68ae8d.png?q=90"
+              style="width:100px;height:60px; border-radius:100%;margin-left:50px;"><br><span
+              style="margin-left: 40px ;">Beauty,Toys & More </span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" onclick="View(6)"><img
+              src="https://rukminim1.flixcart.com/www/200/200/promos/30/04/2021/ead59bd1-a070-4ba6-b6c2-de5f4f8f0824.png?q=90"
+              style="width:100px;height:60px; border-radius:100%;margin-left:45px;"><br><span
+              style="margin-left: 65px ;">Furniture
+            </span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" onclick="View(7)"><img
+              src="https://image.freepik.com/free-vector/set-medicine-bottles-with-labels-pills-white-background-medicines-tablets-vitamin-capsules-thermometer-illustration-flat-style_185004-143.jpg"
+              style="width:70px;height:60px; border-radius:100%;margin-left:50px;"><br><span
+              style="margin-left: 50px ;">Medical
+            </span></a>
+        </li>
+
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<body style="background-color:#f2f2f2 ;">
+  <div style="margin-top: 20px;" class="payform">
+    <div id="demo" class="carousel slide" data-ride="carousel">
+      <ul class="carousel-indicators">
+        <li data-target="#demo" data-slide-to="0" class="active"></li>
+        <li data-target="#demo" data-slide-to="1"></li>
+        <li data-target="#demo" data-slide-to="2"></li>
+      </ul>
+
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <img src="https://t3.ftcdn.net/jpg/03/47/39/04/360_F_347390412_VRr0dvw0nbZglL9mUPTsKAFDHrW8Yhet.jpg"
+            style="width: 100%; height:300px;">
+        </div>
+        <div class="carousel-item">
+          <img
+            src="https://previews.123rf.com/images/pyotrme/pyotrme1807/pyotrme180700002/104942206-banner-template-of-online-shopping-and-e-commerce-modern-flat-design-concept-of-web-page-design-for-.jpg"
+            style="width: 100%;height:300px">
+        </div>
+        <div class="carousel-item">
+          <img
+            src="https://st2.depositphotos.com/5547208/8113/v/950/depositphotos_81139896-stock-illustration-online-shopping-banner.jpg"
+            style="width: 100%; height:300px;">
+        </div>
+      </div>
+
+      <a class="carousel-control-prev" href="#demo" data-slide="prev">
+        <span class="carousel-control-prev-icon"></span>
+      </a>
+      <a class="carousel-control-next" href="#demo" data-slide="next">
+        <span class="carousel-control-next-icon"></span>
+      </a>
+
+    </div>
+    <div id="multi-item-example" class="carousel slide carousel-multi-item" data-ride="carousel"
+      style="margin-top:10px;">
+      <a class="carousel-control-prev" href="#multi-item-example" data-slide="prev"><i
+          class="fas fa-arrow-alt-circle-left" style="font-size:50px;"></i>
+      </a>
+      <a class="carousel-control-next" href="#multi-item-example" data-slide="next"><i
+          class="fas fa-arrow-alt-circle-right" style="font-size:50px;"></i>
+      </a>
+      <ol class="carousel-indicators">
+        <li data-target="#multi-item-example" data-slide-to="0" class="active"></li>
+        <li data-target="#multi-item-example" data-slide-to="1"></li>
+
+      </ol>
+
+      <div class="carousel-inner" role="listbox" style="margin: auto;">
+        <div class="carousel-item active" style="margin: auto; ">
+          <div class="col-md-3" style="float:left; margin: 3px 5px; width:320px;">
+            <div class="card mb-2">
+              <img class="card-img-top pt-3"
+                src="https://rukminim1.flixcart.com/image/312/312/klzhq4w0/mobile/m/i/j/g10-power-pamr0002in-pamr0008in-pamr0010in-motorola-original-imagyyvxqmjfvkdh.jpeg?q=70"
+                alt="image" style="height: 350px; width:180px; margin:auto;">
+              <div class="card-body">
+                <h4 class="card-title" style="font-family: 'Times New Roman', Times, serif;">MOTOROLA G10 Power (Breeze
+                  Blue, 64 GB) (4 GB RAM)
+                </h4>
+                <span class="btn btn-primary">₹9,499</span>
+                <a class="btn btn-primary">ADD to Cart</a>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3" style="float:left; margin: 3px 5px; width:320px;">
+            <div class="card mb-2">
+              <img class="card-img-top pt-3"
+                src="https://rukminim1.flixcart.com/image/312/312/klv7ekw0/washing-machine-new/q/j/r/7-ww70t502nan-tl-samsung-original-imagyw6hhkjjw4pf.jpeg?q=70"
+                alt="image" style="margin-top:20px;height: 350px; width:200px; margin:auto;">
+              <div class="card-body">
+                <h4 class="card-title" style="font-family: 'Times New Roman', Times, serif;">SAMSUNG 7 kg 5 Rating Fully
+                  Automatic Front Load with In-built Heater Black, Grey (WW70T502NAN/TL) (4 GB RAM)
+                </h4>
+                <span class="btn btn-primary">₹32,490</span>
+                <a class="btn btn-primary">ADD to Cart</a>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3" style="float:left; margin: 3px 5px; width:320px;">
+            <div class="card mb-2">
+              <img class="card-img-top pt-3"
+                src="https://rukminim1.flixcart.com/image/495/594/kjiwfbk0-0/t-shirt/e/k/s/m-t305-as10yldnwh-seven-rocks-original-imafz2qfvx7tznnn.jpeg?q=50"
+                alt="image" style="height: 350px; width:250px; margin:auto;">
+              <div class="card-body">
+                <h4 class="card-title" style="font-family: 'Times New Roman', Times, serif;">Striped Men Round Neck
+                  Yellow T-Shirt
+                </h4>
+                <p></p>
+                <span class="btn btn-primary">₹298</span>
+                <a class="btn btn-primary">ADD to Cart</a>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3" style="float:left; margin: 3px 5px; width:320px;">
+            <div class="card mb-2">
+              <img class="card-img-top pt-3"
+                src="https://rukminim1.flixcart.com/image/612/612/jwzabgw0/tripod/tripod-kit/2/y/h/lifemusic-3110-tripod-three-dimensional-head-quick-release-plate-original-imafhh98xdbhkwuv.jpeg?q=70"
+                alt="image" style="height: 350px; width:180px; margin:auto;">
+              <div class="card-body">
+                <h4 class="card-title" style="font-family: 'Times New Roman', Times, serif;">MOTOROLA G10 Power (Breeze
+                  Blue, 64 GB) (4 GB RAM)
+                </h4>
+                <span class="btn btn-primary">₹9,499</span>
+                <a class="btn btn-primary">ADD to Cart</a>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <div class="carousel-item">
+          <div class="col-md-3" style="float:left; margin: 3px 5px; width:320px;">
+            <div class="card mb-2">
+              <img class="card-img-top pt-3"
+                src="https://rukminim1.flixcart.com/image/612/612/kjym9ow0/block-construction/q/m/g/bricks-bullet-bullet-blocks-for-intelligent-kids-creative-original-imafzfabrnygbdgb.jpeg?q=70"
+                alt="image" style="height: 350px; width:200px; margin:auto;">
+              <div class="card-body">
+                <h4 class="card-title" style="font-family: 'Times New Roman', Times, serif;">MOTOROLA G10 Power (Breeze
+                  Blue, 64 GB) (4 GB RAM)
+                </h4>
+                <span class="btn btn-primary">₹9,499</span>
+                <a class="btn btn-primary">ADD to Cart</a>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3" style="float:left; margin: 3px 5px; width:320px;">
+            <div class="card mb-2">
+              <img class="card-img-top pt-3"
+                src="https://rukminim1.flixcart.com/image/612/612/jly1wnk0/shampoo/y/t/y/180-cool-menthol-shampoo-head-shoulders-original-imaf8yzzfhh3tkwd.jpeg?q=70"
+                alt="image" style="height: 350px; width:180px; margin:auto;">
+              <div class="card-body">
+                <h4 class="card-title" style="font-family: 'Times New Roman', Times, serif;">MOTOROLA G10 Power (Breeze
+                  Blue, 64 GB) (4 GB RAM)
+                </h4>
+                <span class="btn btn-primary">₹9,499</span>
+                <a class="btn btn-primary">ADD to Cart</a>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3" style="float:left; margin: 3px 5px; width:320px;">
+            <div class="card mb-2">
+              <img class="card-img-top pt-3"
+                src="https://rukminim1.flixcart.com/image/612/612/jhs0o7k0/bed/g/k/2/queen-na-wrought-iron-fk-db-3142-q-furniturekraft-black-original-imaf5q3gz5zgtsh7.jpeg?q=70"
+                alt="image" style="height: 350px; width:300px; margin:auto;">
+              <div class="card-body">
+                <h4 class="card-title" style="font-family: 'Times New Roman', Times, serif;">MOTOROLA G10 Power (Breeze
+                  Blue, 64 GB) (4 GB RAM)
+                </h4>
+                <span class="btn btn-primary">₹9,499</span>
+                <a class="btn btn-primary">ADD to Cart</a>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3" style="float:left; margin: 3px 5px; width:320px;">
+            <div class="card mb-2">
+              <img class="card-img-top pt-3"
+                src="https://rukminim1.flixcart.com/image/612/612/jzzvs7k0/pill-box/h/t/c/7-day-weekly-tablet-medicine-storage-box-divinezon-7-day-original-imafjtwwhgyvxxhj.jpeg?q=70"
+                alt="image" style="height: 350px; width:180px; margin:auto;">
+              <div class="card-body">
+                <h4 class="card-title" style="font-family: 'Times New Roman', Times, serif;">Divinezon 7 -day 7 Day
+                  Weekly Tablet Medicine Storage Box/Pill Dispenser Pill Box (Grey)
+                </h4>
+                <span class="btn btn-primary">₹229</span>
+                <a class="btn btn-primary">ADD to Cart</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% for message in messages %}
+  <div class="container-fluid p-0">
+    <div class="alert {{ message.tags }} alert-dismissible" role="alert" style="text-align: center;">
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+      {{ message }}
+    </div>
+  </div>
+  {% endfor %}
+  <div style="margin-top: 20px;" class="payform">
+    <div class="container">
+      <div class="row">
+        {% for Product in Mobiles %}
+        <div class="col-md-4">
+          <div class="card mb-4 shadow-sm">
+            <img src="{{Product.image_url}}"
+              style="max-height: 300px; max-width:200px; padding:10px 30px; margin:auto;">
+            <div class="card-body">
+              <h5 class="card-title">{{Product.title}}</h5>
+              <p class="card-text">{{Product.descrip}}</p>
+              <button class="btn btn-primary">₹{{Product.price}}</button>
+              <form method="POST" id="#mobile">{% csrf_token %}
+                <input type="hidden" name="title" value="{{Product.title}}">
+                <input type="hidden" name="image_url" value="{{Product.image_url}}">
+                <input type="hidden" name="descrip" value="{{Product.descrip}}">
+                <input type="hidden" name="price" value="{{Product.price}}">
+                <button class="btn btn-primary" type="submit" style="margin: 5px 5px;">ADD TO CART</button>
+              </form>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+  <div style="margin-top: 20px;" class="payform">
+    <div class="container">
+      <div class="row">
+        {% for Product in Electros %}
+        <div class="col-md-4">
+          <div class="card mb-4 shadow-sm">
+            <img src="{{Product.image_url}}"
+              style="max-height: 300px; max-width:200px; padding:10px 30px; margin:auto;">
+            <div class="card-body">
+              <h5 class="card-title">{{Product.title}}</h5>
+              <p class="card-text">{{Product.descrip}}</p>
+              <button class="btn btn-primary">₹{{Product.price}}</button>
+              <form method="POST" id="#electro">{% csrf_token %}
+                <input type="hidden" name="title" value="{{Product.title}}">
+                <input type="hidden" name="image_url" value="{{Product.image_url}}">
+                <input type="hidden" name="descrip" value="{{Product.descrip}}">
+                <input type="hidden" name="price" value="{{Product.price}}">
+                <button class="btn btn-primary" type="submit" style="margin: 5px 5px;">ADD TO CART</button>
+              </form>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+  <div style="margin-top: 20px;" class="payform">
+    <div class="container">
+      <div class="row">
+        {% for Product in Fashions %}
+        <div class="col-md-4">
+          <div class="card mb-4 shadow-sm">
+            <img src="{{Product.image_url}}"
+              style="max-height: 300px; max-width:200px; padding:10px 30px; margin:auto;">
+            <div class="card-body">
+              <h5 class="card-title">{{Product.title}}</h5>
+              <p class="card-text">{{Product.descrip}}</p>
+              <button class="btn btn-primary">₹{{Product.price}}</button>
+              <form method="POST" id="#fashion">{% csrf_token %}
+                <input type="hidden" name="title" value="{{Product.title}}">
+                <input type="hidden" name="image_url" value="{{Product.image_url}}">
+                <input type="hidden" name="descrip" value="{{Product.descrip}}">
+                <input type="hidden" name="price" value="{{Product.price}}">
+                <button class="btn btn-primary" type="submit" style="margin: 5px 5px;">ADD TO CART</button>
+              </form>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+  <div style="margin-top: 20px;" class="payform">
+    <div class="container">
+      <div class="row">
+        {% for Product in Homes %}
+        <div class="col-md-4">
+          <div class="card mb-4 shadow-sm">
+            <img src="{{Product.image_url}}"
+              style="max-height: 300px; max-width:200px; padding:10px 30px; margin:auto;">
+            <div class="card-body">
+              <h5 class="card-title">{{Product.title}}</h5>
+              <p class="card-text">{{Product.descrip}}</p>
+              <button class="btn btn-primary">₹{{Product.price}}</button>
+              <form method="POST" id="#home">{% csrf_token %}
+                <input type="hidden" name="title" value="{{Product.title}}">
+                <input type="hidden" name="image_url" value="{{Product.image_url}}">
+                <input type="hidden" name="descrip" value="{{Product.descrip}}">
+                <input type="hidden" name="price" value="{{Product.price}}">
+                <button class="btn btn-primary" type="submit" style="margin: 5px 5px;">ADD TO CART</button>
+              </form>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+  <div style="margin-top: 20px;" class="payform">
+    <div class="container">
+      <div class="row">
+        {% for Product in Beauty %}
+        <div class="col-md-4">
+          <div class="card mb-4 shadow-sm">
+            <img src="{{Product.image_url}}"
+              style="max-height: 300px; max-width:200px; padding:10px 30px; margin:auto;">
+            <div class="card-body">
+              <h5 class="card-title">{{Product.title}}</h5>
+              <p class="card-text">{{Product.descrip}}</p>
+              <button class="btn btn-primary">₹{{Product.price}}</button>
+              <form method="POST" id="#beauty">{% csrf_token %}
+                <input type="hidden" name="title" value="{{Product.title}}">
+                <input type="hidden" name="image_url" value="{{Product.image_url}}">
+                <input type="hidden" name="descrip" value="{{Product.descrip}}">
+                <input type="hidden" name="price" value="{{Product.price}}">
+                <button class="btn btn-primary" type="submit" style="margin: 5px 5px;">ADD TO CART</button>
+              </form>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+  <div style="margin-top: 20px;" class="payform">
+    <div class="container">
+      <div class="row">
+        {% for Product in Furnitures %}
+        <div class="col-md-4">
+          <div class="card mb-4 shadow-sm">
+            <img src="{{Product.image_url}}"
+              style="max-height: 300px; max-width:200px; padding:10px 30px; margin:auto;">
+            <div class="card-body">
+              <h5 class="card-title">{{Product.title}}</h5>
+              <p class="card-text">{{Product.descrip}}</p>
+              <button class="btn btn-primary">₹{{Product.price}}</button>
+              <form method="POST" id="#furniture">{% csrf_token %}
+                <input type="hidden" name="title" value="{{Product.title}}">
+                <input type="hidden" name="image_url" value="{{Product.image_url}}">
+                <input type="hidden" name="descrip" value="{{Product.descrip}}">
+                <input type="hidden" name="price" value="{{Product.price}}">
+                <button class="btn btn-primary" type="submit" style="margin: 5px 5px;">ADD TO CART</button>
+              </form>
+              
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+  <div style="margin-top: 20px;" class="payform">
+    <div class="container">
+      <div class="row">
+        {% for Product in Medicines %}
+        <div class="col-md-4">
+          <div class="card mb-4 shadow-sm">
+            <img src="{{Product.image_url}}"
+              style="max-height: 300px; max-width:200px; padding:10px 30px; margin:auto;">
+            <div class="card-body">
+              <h5 class="card-title">{{Product.title}}</h5>
+              <p class="card-text">{{Product.descrip}}</p>
+              <button class="btn btn-primary">₹{{Product.price}}</button>
+              <form method="POST" id="#medicine">{% csrf_token %}
+                <input type="hidden" name="title" value="{{Product.title}}">
+                <input type="hidden" name="image_url" value="{{Product.image_url}}">
+                <input type="hidden" name="descrip" value="{{Product.descrip}}">
+                <input type="hidden" name="price" value="{{Product.price}}">
+                <button class="btn btn-primary" type="submit" style="margin: 5px 5px;">ADD TO CART</button>
+              </form>
+              
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+
+  <footer class="page-footer font-small blue pt-4" style="background-color: lightblue;">
+    <div class="container-fluid text-center text-md-left">
+      <div class="row">
+        <div class="col-md-6 mt-md-0 mt-3">
+          <h5 class="text-uppercase"><img src="/static/photos/kibazaaricon.png" style="width: 60%;"></h5>
+          <h5 style="font-family: 'Times New Roman', Times, serif;">Krishna Internation Bazaar Online Shopping Center
+          </h5>
+        </div>
+        <div class="col-md-3 mb-md-0 mb-3">
+          <h5 class="text-uppercase" style="font-family: 'Times New Roman', Times, serif;">Customer services </h5>
+          <ul class="list-unstyled">
+            <li>
+              <a href="#!">91 8654378976</a>
+            </li>
+            <li>
+              <a href="#!">Fax : 2409876</a>
+            </li>
+            <li>
+              <a href="#!">Krishna Internation Bank</a>
+            </li>
+            <li>
+              <a href="#!">Krishna Internation Bank Online Payment</a>
+            </li>
+            <li>
+              <a href="#!">Krishna Internation Bazaar Online Shopping Site</a>
+            </li>
+            <li>
+              <a href="#!">Main Office : Mumbai</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer-copyright text-center py-3">
+      <a href="#" class="fa fa-linkedin"></a>
+      <a href="" class="fa fa-instagram"></a>
+      <a href="" class="fa fa-facebook"></a>
+      <a href="" class="fa fa-github"></a><br>
+      © 2020 Copyright:
+      <a href="#">All right reserved</a>
+    </div>
+  </footer>
+  <script>
+    var first = 0;
+    View(first);
+    function View(n) {
+      var x = document.getElementsByClassName("payform");
+      for (i = 0; i < x.length; i++) {
+        x[i].style.display = "none";
+      }
+      x[n].style.display = "block";
+      $(document).ready(function () {
+        $("#mobile :input").prop("disabled", true);
+      });
+      $(document).ready(function () {
+        $("#electro :input").prop("disabled", true);
+      });
+      $(document).ready(function () {
+        $("#fashion :input").prop("disabled", true);
+      });
+      $(document).ready(function () {
+        $("#home :input").prop("disabled", true);
+      });
+      $(document).ready(function () {
+        $("#beauty :input").prop("disabled", true);
+      });
+      $(document).ready(function () {
+        $("#furniture :input").prop("disabled", true);
+      });
+      $(document).ready(function () {
+        $("#medicine :input").prop("disabled", true);
+      });
+      if (n == 1) {
+        $(document).ready(function () {
+          $("#mobile :input").prop("disabled", false);
+        });
+      }
+      if (n == 2) {
+        $(document).ready(function () {
+          $("#electro :input").prop("disabled", false);
+        });
+      }
+      if (n == 3) {
+        $(document).ready(function () {
+          $("#fashion :input").prop("disabled", false);
+        });
+      }
+      if (n == 4) {
+        $(document).ready(function () {
+          $("#home :input").prop("disabled", false);
+        });
+      }
+      if (n == 5) {
+        $(document).ready(function () {
+          $("#beauty :input").prop("disabled", false);
+        });
+      }
+      if (n == 6) {
+        $(document).ready(function () {
+          $("#furniture :input").prop("disabled", false);
+        });
+      }
+      if (n == 7) {
+        $(document).ready(function () {
+          $("#medicine :input").prop("disabled", false);
+        });
+      }
+    }
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous">
+    </script>
+</body>
+
+</html>

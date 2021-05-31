@@ -1,5 +1,6 @@
-from django.urls import path,include
+from django.urls import path
 from . import views
+from Transition import views as trnasition
 
 urlpatterns = [
     path('',views.login),
@@ -7,5 +8,4 @@ urlpatterns = [
     path('profile/logout/<slug:user_id>/',views.logout),
     path('profile/Edit/<slug:user_id>/',views.edit),
     path('profile/verify/<slug:user_id>/',views.verify),
-
 ]
