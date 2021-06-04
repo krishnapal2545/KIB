@@ -35,6 +35,7 @@ CSRF_COOKIE_SECURE = True
 SECURE_HSTS_INCLUDE_SUBDOMAINS=True
 SECURE_HSTS_PRELOAD = True
 DEBUG = False
+# DEBUG = True
 
 ALLOWED_HOSTS = ['127.0.0.1','onlinekib.herokuapp.com']
 
